@@ -59,10 +59,10 @@ def score_hand(hand, starter):
     flush_score   = {4:4, 5:5}       # length-of-flush:score pairs
     nobs_score    = 2
     
-    return fifteen_score*count_fifteens(hand, starter) + 
-            run_score[count_run(hand, starter)] + 
-            count_pairs*count_pairs(hand, starter) +
-            flush_score[count_flush(hand, starter)] +
+    return fifteen_score*count_fifteens(hand, starter) + \
+            run_score[count_run(hand, starter)] + \
+            count_pairs*count_pairs(hand, starter) + \
+            flush_score[count_flush(hand, starter)] + \
             nobs_score*count_nobs(hand, starter)
 
 
