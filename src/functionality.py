@@ -51,17 +51,23 @@ def score_hand(hand, starter):
         - pair(s)
         - flush
         - nobs
-    """    
-    return sum([fifteens(hand, starter),
-                runs(hand, starter),
-                pairs(hand, starter),
-                flush(hand, starter),
-                nobs(hand, starter)])
-
-
-def fifteens(hand, starter, total=15):
-    """Return fifteens-only score contribution of a hand paired with a starter card
+    """
+    # point values for each score "structure"
+    fifteen_score = 2
+    run_score     = {3:3, 4:4, 5:5}  # length-of-run:score pairs
+    pair_score    = 2
+    flush_score   = {4:4, 5:5}       # length-of-flush:score pairs
+    nobs_score    = 2
     
+    return fifteen_score*count_fifteens(hand, starter) + 
+            run_score[count_run(hand, starter)] + 
+            count_pairs*count_pairs(hand, starter) +
+            flush_score[count_flush(hand, starter)] +
+            nobs_score*count_nobs(hand, starter)
+
+
+def count_fifteens(hand, starter, total=15):
+    """Return fifteens-only score contribution of a hand paired with a starter card
     WRITE UNIT TEST FOR THIS"""
     # include the starter card in the hand if recursion depth is 0
     if starter != -1:
@@ -80,9 +86,8 @@ def fifteens(hand, starter, total=15):
         return fifteens(hand[1:], -1, total-hand[0]) + fifteens(hand[1:], -1, total)
 
 
-def pairs(hand, starter):
+def count_pairs(hand, starter):
     """Return pairs-only score contribution of a hand paired with a starter card
-    
     WRITE UNIT TEST FOR THIS"""
     # add the starter to the hand
     hand += [starter]
