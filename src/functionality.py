@@ -42,7 +42,7 @@ def card_string(card):
     return "{0}-{1}".format(ranks[card_rank(card)], suites[card_suite(card)])
 
 
-def count(starter, hand):
+def score_hand(hand, starter):
     """Returns the total score of a starter card paired with a hand
     NOT COMPLETED:
     things to count:
@@ -60,9 +60,11 @@ def count(starter, hand):
 
 
 def fifteens(hand, starter, total=15):
-    """Return fifteens-only score contribution of a hand paired with a starter card"""
+    """Return fifteens-only score contribution of a hand paired with a starter card
+    
+    WRITE UNIT TEST FOR THIS"""
     # include the starter card in the hand if recursion depth is 0
-    if starter:
+    if starter != -1:
         hand = [starter] + hand
         hand = map(card_value, hand)
     
@@ -75,6 +77,22 @@ def fifteens(hand, starter, total=15):
     
     # recursively call fifteens() on the cases with and without using the first card
     else:
-        return fifteens(hand[1:], 0, total-hand[0]) + fifteens(hand[1:], 0, total)
+        return fifteens(hand[1:], -1, total-hand[0]) + fifteens(hand[1:], -1, total)
 
 
+def pairs(hand, starter):
+    """Return pairs-only score contribution of a hand paired with a starter card
+    
+    WRITE UNIT TEST FOR THIS"""
+    # add the starter to the hand
+    hand += [starter]
+    
+    score = 0
+    
+    n = len(hand)
+    for i in xrange(n-1):
+        for j in xrange(i+1,n):
+            if hand[i] == hand[j]:
+                score += 2
+    return score
+    
