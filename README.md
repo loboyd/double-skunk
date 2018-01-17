@@ -12,7 +12,7 @@ This project would also be a good candidate to explore some peer-to-peer network
 ## Technology
 For the foreseeable future, this project will be built using Python 2.7.
 
-## Authors
+## Author
 
 * **Logan Boyd** - [loboyd](https://github.com/loboyd)
 
