@@ -1,6 +1,8 @@
 # Double-skunk
 a simple platform for playing text-based multiplayer cribbage
 
+In cribbage, a skunk is when one player beats the other so badly (the loser having less than 90 points), that 2 wins are scored. A double-skunk occurs when a player loses with less than 45 points pegged and demands a total of 4 wins.
+
 ## Just Getting the Ball Rolling
 This project is very new, and as such, does not have much use for installation info and whatnot just yet. The goal of the project is to build a simple text-based platform so that I can play cribbage with a friend over the internet. The application will probably just run in a terminal.
 
