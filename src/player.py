@@ -1,4 +1,4 @@
-import functionality
+import functionality as func
 
 class Player(object):
     """Class describing a player including name (input argument), score and hand
@@ -49,12 +49,12 @@ class Player(object):
         """Print hand in easy-to-read way"""
         # print card rank line
         for card in self.hand:
-            print "| {0}".format(ranks[card_rank(card)]),
+            print "| {0}".format(func.ranks[func.card_rank(card)]),
         print '|'
 
         # print card suite line
         for card in self.hand:
-            print "| {0}".format(suites[card_suite(card)]),
+            print "| {0}".format(func.suites[func.card_suite(card)]),
         print '|'
 
         # print separater and hand indices
@@ -65,3 +65,8 @@ class Player(object):
         for i in xrange(1, len(self.hand) + 1):
             print "| {0}".format(str(i)),
         print '|\n'
+    
+    
+    def peg(self):
+        """TO-BE-COMPLETED"""
+        return 0

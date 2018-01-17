@@ -1,3 +1,5 @@
+import random
+
 # general game tables
 suites = ['S', 'D', 'C', 'H']
 ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'X', 'J', 'Q', 'K']
@@ -67,7 +69,7 @@ def score_hand(hand, starter):
 
 
 def count_fifteens(hand, starter, total=15):
-    """Return fifteens-only score contribution of a hand paired with a starter card
+    """Return number of unique fifteen-pairs of a hand paired with a starter card
     WRITE UNIT TEST FOR THIS"""
     # include the starter card in the hand if recursion depth is 0
     if starter != -1:
@@ -77,7 +79,7 @@ def count_fifteens(hand, starter, total=15):
     # base case
     if len(hand) == 1:
         if total == hand[0]:
-            return 2
+            return 1
         else:
             return 0
     

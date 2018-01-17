@@ -3,10 +3,12 @@ This file contains the main game loop.
 """
 
 import random
+import functionality as func
+import player
 
 # initialize players
-alice = Player('Alice')
-bob = Player('Bob')
+alice = player.Player('Alice')
+bob = player.Player('Bob')
 
 # generate (uniformly) random boolean to determine first dealer
 if random.random() < 0.5:
@@ -20,14 +22,14 @@ print "{0} gets the first crib!\n".format(dealer.name)
 of working with a single console"""
 while True:
     # deal
-    alice.hand, bob.hand, starter_card = deal()
+    alice.hand, bob.hand, starter_card = func.deal()
 
     # discard
     crib = alice.discard() + bob.discard()
 
     # reveal (display the starter card to players)
     # temporary solution for building functionality
-    print "\nSTARTER CARD: {0}".format(card_string(starter_card))
+    print "\nSTARTER CARD: {0}".format(func.card_string(starter_card))
 
     # the play (pegging)
     table = []
