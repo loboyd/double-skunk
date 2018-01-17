@@ -46,26 +46,29 @@ def card_string(card):
 
 def score_hand(hand, starter):
     """Returns the total score of a starter card paired with a hand
-    NOT COMPLETED:
+    NOT COMPLETED
     things to count:
-        - fifteen(s)
+        - fifteen(s) - done
         - run(s)
-        - pair(s)
+        - pair(s)    - done
         - flush
-        - nobs
+        - nobs       - done
     """
-    # point values for each score "structure"
-    fifteen_score = 2
-    run_score     = {3:3, 4:4, 5:5}  # length-of-run:score pairs
-    pair_score    = 2
-    flush_score   = {4:4, 5:5}       # length-of-flush:score pairs
-    nobs_score    = 2
-    
-    return fifteen_score*count_fifteens(hand, starter) + \
-            run_score[count_run(hand, starter)] + \
-            count_pairs*count_pairs(hand, starter) + \
-            flush_score[count_flush(hand, starter)] + \
-            nobs_score*count_nobs(hand, starter)
+    # # point values for each score "structure"
+    # fifteen_point_val = 2
+    # run_point_val     = {0:0, 3:3, 4:4, 5:5}  # length-of-run:score pairs
+    # pair_point_val    = 2
+    # flush_point_val   = {0:0, 4:4, 5:5}       # length-of-flush:score pairs
+    # nobs_point_val    = 2
+    #
+    # fifteen_score = fifteen_point_val * count_fifteens(hand, starter)
+    # run_score = 0  # 0 is a place holder
+    #
+    # return fifteen_score*count_fifteens(hand, starter) + \
+    #         run_score[count_run(hand, starter)] + \
+    #         count_pairs*count_pairs(hand, starter) + \
+    #         flush_score[count_flush(hand, starter)] + \
+    #         nobs_score*count_nobs(hand, starter)
 
 
 def count_fifteens(hand, starter, total=15):
@@ -85,11 +88,21 @@ def count_fifteens(hand, starter, total=15):
     
     # recursively call fifteens() on the cases with and without using the first card
     else:
-        return fifteens(hand[1:], -1, total-hand[0]) + fifteens(hand[1:], -1, total)
+        return count_fifteens(hand[1:], -1, total-hand[0]) + count_fifteens(hand[1:], -1, total)
+
+
+def count_run(hand, starter):
+    """Return the length of the largest run of a hand paired with a starter card
+    NOT COMPLETE"""
+    # add the starter to the hand
+    hand += [starter]
+    hand = sorted(hand)
+    
+    return 0
 
 
 def count_pairs(hand, starter):
-    """Return pairs-only score contribution of a hand paired with a starter card
+    """Return number of pairs of a hand paired with a starter card
     WRITE UNIT TEST FOR THIS"""
     # add the starter to the hand
     hand += [starter]
@@ -100,6 +113,20 @@ def count_pairs(hand, starter):
     for i in xrange(n-1):
         for j in xrange(i+1,n):
             if hand[i] == hand[j]:
-                score += 2
+                score += 1
     return score
-    
+
+
+def count_flush(hand, starter,crib=False):
+    """Return the length of the largest flush (greater than 3) of a hand paired with a starter card"""
+    return 0
+
+
+def count_nobs(hand, starter):
+    """Return 1 if a hand paired with a starter card contains nobs, 0 otherwise
+    WRITE UNIT TEST FOR THIS"""
+    for card in hand:
+        if ranks[card_rank(card)] == 'J' and card_suite(card) == card(suite):
+            return 1
+    return 0
+
