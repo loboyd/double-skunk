@@ -17,12 +17,21 @@ import player
 
 # find/connect to peer
 
-# exchange info (username, random seed info, etc.)
+# exchange info (username and whatever else)
 
+# perform "coin flip" for first dealer (this is not trivial)
 
+# game loop
 
+    # deal cards
+    
+    # discard to crib
 
-
+    # pegging phase
+    
+    # reveal starter card
+    
+    # count hands
 
 
 
