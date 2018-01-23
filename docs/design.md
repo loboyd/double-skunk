@@ -17,3 +17,6 @@ Below is an outline of the procedure that the first version of the peer software
 	* pegging phase
 	* reveal starter card (this might be done before the pegging phase)
 	* count hands and crib
+
+## A note about security and development timeline
+In an attempt to get *something* working as quickly as possible and keep morale high, the things with security considerations mentioned above will probably be implemented insecurely at first, but in a way that they can be easily swapped with a secure version. For example, the code should be modular enough with respect to the dealing protocol that the insecure protocol directly replaced by the secure protocol with minimal changes to the surrounding code.
