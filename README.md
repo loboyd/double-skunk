@@ -7,12 +7,10 @@ In cribbage, a skunk is when one player beats the other so badly (the loser havi
 This project is very new, and as such, does not have much use for installation info and whatnot just yet. The goal of the project is to build a simple text-based platform so that I can play cribbage with a friend over the internet. The application will probably just run in a terminal.
 
 ## Design
-
+See [design.md](https://github.com/loboyd/double-skunk/blob/master/docs/design.md) for overall design considerations.
 
 ## Ideas Beyond the Short Term
 I would also like to use this platform to develop an AI cribbage player. This is partly just out of interest in trying to build a strong AI, but would also be useful to a player looking to play offline.
-
-This project would also be a good candidate to explore some peer-to-peer networking concepts. That might come as a future repo.
 
 ## Technology
 At the present time, this project is being developed with Python 2, but should probably ultimately have support for Python 3 as well.
