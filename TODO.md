@@ -6,8 +6,10 @@ Ideally, this document will contain "everything" that should be completed. I put
 - [x] Consider breaking this file into "player," "functionality," and "main" files -- EDIT -- ended up doing this
 - [ ] Write some stand-alone documentation
   - [x] Create this TODO list
+  - [x] Create design documentation
   - [ ] Create user/developer documentation (this is a way off at this point, particularly dev docs)
 - [ ] Further specify the design (in documention) including networking
+- [ ] Work on formatting for gameplay, i.e., how and when the console is cleared, the format of the pegging phase
 ## main.py
 - [ ] Finish designing the main game loop
 - [ ] Write code to initialize networking code once it is implemented
@@ -15,6 +17,8 @@ Ideally, this document will contain "everything" that should be completed. I put
 - [ ] Come up with a nice way of sorting the hands (It would be really nice if the numbers representing the cards happened to share the preferred ordering of the cards -- this way, the native sorted() could be used. -- EDIT -- I think this is working now, but it should probably be double-checked
 - [ ] Write a function to count points
   - [ ] Finish design for the score_hand() function
+  - [x] Finish pairs()
+  - [x] Finish fifteens
   - [ ] Finish count_run()
   - [ ] Write count_flush()
   - [ ] Write unit tests for all functions called from score_hand()
