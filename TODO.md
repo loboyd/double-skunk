@@ -22,7 +22,7 @@ Ideally, this document will contain "everything" that should be completed. I put
 - [ ] Write code for all user commands
   - [ ] add: add a new friend (name, IP address)
   - [ ] friends: see friend list (probably pickled dictionary)
-  - [ ] name: edit your username
+  - [ ] name: edit your username (probably also pickled)
   - [ ] new: enter new game
     - [ ] outline main game loop
   - [x] help: see this list of commands
