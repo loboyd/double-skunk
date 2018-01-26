@@ -10,9 +10,23 @@ Ideally, this document will contain "everything" that should be completed. I put
   - [ ] Create user/developer documentation (this is a way off at this point, particularly dev docs)
 - [ ] Further specify the design (in documention) including networking
 - [ ] Work on formatting for gameplay, i.e., how and when the console is cleared, the format of the pegging phase
+- [ ] Add user commands to documentation
 ## main.py
-- [ ] Finish designing the main game loop
 - [ ] Write code to initialize networking code once it is implemented
+- [ ] Update clearscreen() to be cross-platform
+- [x] Write enter statement
+- [x] Write exit_game()
+- [x] Write print_commands() for user commands
+- [ ] Maintain user command list order
+- [x] Write main client loop
+- [ ] Write code for all user commands
+  - [ ] add: add a new friend (name, IP address)
+  - [ ] friends: see friend list (probably pickled dictionary)
+  - [ ] name: edit your username
+  - [ ] new: enter new game
+    - [ ] outline main game loop
+  - [x] help: see this list of commands
+  - [x] quit: quit game
 ## functionality.py
 - [ ] Come up with a nice way of sorting the hands (It would be really nice if the numbers representing the cards happened to share the preferred ordering of the cards -- this way, the native sorted() could be used. -- EDIT -- I think this is working now, but it should probably be double-checked
 - [ ] Write a function to count points
@@ -23,4 +37,5 @@ Ideally, this document will contain "everything" that should be completed. I put
   - [ ] Write count_flush()
   - [ ] Write unit tests for all functions called from score_hand()
 ## player.py
+- [ ] Redesign player.py to be used for peer-to-peer
 - [ ] Write peg() method
