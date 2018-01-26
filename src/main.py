@@ -6,7 +6,7 @@ import random
 import functionality as func
 import player
 
-commands = {
+user_commands = {
     'add......': 'add a new friend',
     'friends..': 'see friend list',
     'name.....': 'edit your username',
@@ -16,54 +16,69 @@ commands = {
 }
 
 
-def print_commands():
-    for c in commands:
-        print("{0}{1}".format(c, commands[c]))
+def print_user_commands():
+    """Print list of user commands and their descriptions"""
+    for c in user_commands:
+        print("{0}{1}".format(c, user_commands[c]))
     print
 
 
-def clearscreen():
-    """Clears the console. UPDATE TO BE CROSS-PLATFORM"""
+def clear_screen():
+    """Clears the console. 
+    
+    UPDATE TO BE CROSS-PLATFORM"""
+    
     import os
     os.system('clear')
 
 
+def print_title_bar():
+    """Prints the double-skunk title bar"""
+    print("====DOUBLE-SKUNK=============================")
+
+
+def exit_client():
+    """Say goodbye and exit client"""
+    clear_screen()
+    print_title_bar()
+    print("\nSee you next time!\n")
+    exit()
+
+
 # entry statement
-clearscreen()
-print("Welcome to double-skunk!")
+clear_screen()
+print_title_bar()
+print("\nWelcome to double-skunk!")
 print("Enter the following commands to navigate:\n")
-print_commands()
+print_user_commands()
 
 # main client loop
-usr = raw_input()
-while usr != 'quit':
+while True:
+    usr = raw_input("")
+    clear_screen()
+    print_title_bar()
+    print
+    
     if usr == 'add':
-        pass
         # add friend
+        print "functionality yet to be added\n"
     elif usr == 'friends':
         # print list of friends
-        pass
+        print "functionality yet to be added\n"
     elif usr == 'name':
         # edit/set username
-        pass
+        print "functionality yet to be added\n"
     elif usr == 'new':
         # enter new game
-        pass
+        print "functionality yet to be added\n"
     elif usr == 'help':
         print
-        print_commands()
+        print_user_commands()
     elif usr == 'quit' or usr == 'exit':
-        exit_game()
+        exit_client()
     else:
         print('That was an invalid entry. Enter \'help\' to see the available commands.')
-    
-    usr = raw_input()
 
-
-# exit statement
-def exit_game():
-    print("\nSee you next time!")
-    exit()
 
 
 
