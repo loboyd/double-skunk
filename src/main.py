@@ -61,16 +61,20 @@ while True:
     
     if usr == 'add':
         # add friend
-        print "functionality yet to be added\n"
+        print("functionality yet to be added")
+        print("enter \"help\" to go back\n")
     elif usr == 'friends':
         # print list of friends
-        print "functionality yet to be added\n"
+        print("functionality yet to be added")
+        print("enter \"help\" to go back\n")
     elif usr == 'name':
         # edit/set username
-        print "functionality yet to be added\n"
+        print("functionality yet to be added")
+        print("enter \"help\" to go back\n")
     elif usr == 'new':
         # enter new game
-        print "functionality yet to be added\n"
+        print("functionality yet to be added")
+        print("enter \"help\" to go back\n")
     elif usr == 'help':
         print
         print_user_commands()
