@@ -45,6 +45,34 @@ def exit_client():
     exit()
 
 
+def play_game():
+    """Facilitates gameplay between two peers -- friends or public"""
+    # "play against friend or on public network?"
+    
+    # establish P2P connection with socket(s)
+    
+    # determine first dealer
+    
+    # game loop
+    
+    raise NotImplementedError
+
+
+def add_friend():
+    """Saves a new friend to the friend list"""
+    raise NotImplementedError
+
+
+def view_friends_list():
+    """prints friends list to screen"""
+    raise NotImplementedError
+
+
+def edit_user_name():
+    """Allows user to edit public username"""
+    raise NotImplementedError
+
+
 # entry statement
 clear_screen()
 print_title_bar()
