@@ -50,12 +50,15 @@ def play_game():
     
     NOT CURRENTLY A SECURE AND TRUSTLESS IMPLEMENTATION
     """
-    raise NotImplementError
-    return None
+    raise NotImplementError  # temporary
+    return None              # also temporary
+    
+    slf_score = 0
+    opp_score = 0
     
     # "play against friend or on public network?"
     
-    # establish P2P connection with socket(s)
+    # establish connection with socket(s)
     
     # determine first dealer (THIS IS NOT SECURE AND TRUSTLESS)
     first_pass = True
@@ -63,6 +66,7 @@ def play_game():
         first_pass == False
         opp_rand = get_random_from_opponent()  # dummy function; not yet implemented
         slf_rand = random.random()
+    
     if opp_rand > slf_rand:
         dealer = 1
     else:
@@ -77,6 +81,7 @@ def play_game():
       - count hands and crib
     """
     
+
     # deal cards (THIS IS NOT SECURE AND TRUSTLESS)
     # generate seed to ensure identical shuffles
     
@@ -105,38 +110,40 @@ print("Enter the following commands to navigate:\n")
 print_user_commands()
 
 # main client loop
-while True:
-    usr = raw_input("")
-    clear_screen()
-    print_title_bar()
-    print
-    
-    if usr == 'add':
-        # add friend
-        print("functionality yet to be added")
-        print("enter \"help\" to go back\n")
-    elif usr == 'friends':
-        # print list of friends
-        print("functionality yet to be added")
-        print("enter \"help\" to go back\n")
-    elif usr == 'name':
-        # edit/set username
-        print("functionality yet to be added")
-        print("enter \"help\" to go back\n")
-    elif usr == 'new':
-        # enter new game
-        print("functionality yet to be added")
-        print("enter \"help\" to go back\n")
-    elif usr == 'help':
+def main():
+    while True:
+        usr = raw_input("")
+        clear_screen()
+        print_title_bar()
         print
-        print_user_commands()
-    elif usr == 'quit' or usr == 'exit':
-        exit_client()
-    else:
-        print('That was an invalid entry. Enter \'help\' to see the available commands.')
+    
+        if usr == 'add':
+            # add friend
+            print("functionality yet to be added")
+            print("enter \"help\" to go back\n")
+        elif usr == 'friends':
+            # print list of friends
+            print("functionality yet to be added")
+            print("enter \"help\" to go back\n")
+        elif usr == 'name':
+            # edit/set username
+            print("functionality yet to be added")
+            print("enter \"help\" to go back\n")
+        elif usr == 'new':
+            # enter new game
+            print("functionality yet to be added")
+            print("enter \"help\" to go back\n")
+        elif usr == 'help':
+            print
+            print_user_commands()
+        elif usr == 'quit' or usr == 'exit':
+            exit_client()
+        else:
+            print('That was an invalid entry. Enter \'help\' to see the available commands.')
 
 
-
+if __name__ == "__main__":
+    main()
 
 
 
