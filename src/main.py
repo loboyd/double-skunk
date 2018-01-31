@@ -46,17 +46,40 @@ def exit_client():
 
 
 def play_game():
-    """Facilitates gameplay between two peers -- friends or public"""
+    """Facilitates gameplay between two peers -- friends or public
+    
+    NOT CURRENTLY A SECURE AND TRUSTLESS IMPLEMENTATION
+    """
+    raise NotImplementError
+    return None
+    
     # "play against friend or on public network?"
     
     # establish P2P connection with socket(s)
     
-    # determine first dealer
+    # determine first dealer (THIS IS NOT SECURE AND TRUSTLESS)
+    first_pass = True
+    while first_pass or opp_rand == slf_rand:
+        first_pass == False
+        opp_rand = get_random_from_opponent()  # dummy function; not yet implemented
+        slf_rand = random.random()
+    if opp_rand > slf_rand:
+        dealer = 1
+    else:
+        dealer = 0
     
+    """    
+    game loop
+      - deal cards
+      - discard crib cards
+      - reveal starter card
+      - the play (pegging phase)
+      - count hands and crib
+    """
     
-    # game loop
+    # deal cards (THIS IS NOT SECURE AND TRUSTLESS)
+    # generate seed to ensure identical shuffles
     
-    raise NotImplementedError
 
 
 def add_friend():
