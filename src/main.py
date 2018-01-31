@@ -102,15 +102,15 @@ def edit_user_name():
     raise NotImplementedError
 
 
-# entry statement
-clear_screen()
-print_title_bar()
-print("\nWelcome to double-skunk!")
-print("Enter the following commands to navigate:\n")
-print_user_commands()
-
-# main client loop
 def main():
+    # entry statement
+    clear_screen()
+    print_title_bar()
+    print("\nWelcome to double-skunk!")
+    print("Enter the following commands to navigate:\n")
+    print_user_commands()
+    
+    # client loop
     while True:
         usr = raw_input("")
         clear_screen()
