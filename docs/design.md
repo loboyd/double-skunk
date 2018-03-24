@@ -4,7 +4,7 @@ A peer-to-peer network will be used to connect players rather than a server-clie
 ## Peer
 In a peer-to-peer network, each peer has the same authortity and responsibility as any other. The responsibilities of a peer in our network are roughly the following: store a few pieces of data such as a player's chosen display name, the win/lose count, etc., maintain a set of previously seen peers, support the network routing protocol, and of course, follow the protocol for a trustless game of cribbage.
 
-For the time being, routing is taking a back burner. As long as peers can manually add each other, two friends can still use the network to play amongst themselves. Playing on a "public" network can come later.
+For the time being, routing is taking a back burner. As long as peers can manually add each other, two friends can still use the network to play amongst themselves. Playing on a "public" network can come later. One issue with maintaining peer connections is that peers' IP addresses can change with time. One solution might be to have each player assigned a unique key which is used to query a distributed hash table returning their current IP address (for which they are responsible for updating). However, this is only feasible with well-connected network of sufficient size. Since our network will likely be much too small, we may have to settle for a centralized server storing IP addresses.
 
 Below is an outline of the procedure that the first version of the peer software will follow when two users are playing against each other:
 
