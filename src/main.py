@@ -24,10 +24,10 @@ def print_user_commands():
 
 
 def clear_screen():
-    """Clears the console. 
-    
+    """Clears the console.
+
     UPDATE TO BE CROSS-PLATFORM"""
-    
+
     import os
     os.system('clear')
 
@@ -47,32 +47,32 @@ def exit_client():
 
 def play_game():
     """Facilitates gameplay between two peers -- friends or public
-    
+
     NOT CURRENTLY A SECURE AND TRUSTLESS IMPLEMENTATION
     """
     raise NotImplementError  # temporary
     return None              # also temporary
-    
+
     slf_score = 0
     opp_score = 0
-    
+
     # "play against friend or on public network?"
-    
+
     # establish connection with socket(s)
-    
+
     # determine first dealer (THIS IS NOT SECURE AND TRUSTLESS)
     first_pass = True
     while first_pass or opp_rand == slf_rand:
         first_pass == False
         opp_rand = get_random_from_opponent()  # dummy function; not yet implemented
         slf_rand = random.random()
-    
+
     if opp_rand > slf_rand:
         dealer = 1
     else:
         dealer = 0
-    
-    """    
+
+    """
     game loop
       - deal cards
       - discard crib cards
@@ -80,11 +80,11 @@ def play_game():
       - the play (pegging phase)
       - count hands and crib
     """
-    
+
 
     # deal cards (THIS IS NOT SECURE AND TRUSTLESS)
     # generate seed to ensure identical shuffles
-    
+
 
 
 def add_friend():
@@ -109,14 +109,14 @@ def main():
     print("\nWelcome to double-skunk!")
     print("Enter the following commands to navigate:\n")
     print_user_commands()
-    
+
     # client loop
     while True:
         usr = raw_input("")
         clear_screen()
         print_title_bar()
         print
-    
+
         if usr == 'add':
             # add friend
             print("functionality yet to be added")
@@ -177,11 +177,11 @@ if __name__ == "__main__":
 # game loop
 
     # deal cards
-    
+
     # discard to crib
 
     # pegging phase
-    
+
     # reveal starter card
-    
+
     # count hands
