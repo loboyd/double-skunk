@@ -1,4 +1,3 @@
-"""--------------------------------------------------------------------------"""
 """This code will eventually serve to exchange the players' ``cuts`` of the deck
 for determining the first dealer. This can also be easily generalized to any
 two-way exchange of two strings."""
