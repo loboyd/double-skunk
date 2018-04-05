@@ -4,7 +4,7 @@ https://stackoverflow.com/questions/16130786/why-am-i-getting-the-error-connecti
 import socket #import socket module
 
 s = socket.socket() #create a socket object
-host = '192.168.1.149' #Host i.p
+host = '192.168.1.100' #Host i.p
 port = 12397 #Reserve a port for your service
 
 s.connect((host,port))
