@@ -5,6 +5,7 @@ This file contains the main game loop.
 import random
 import functionality as func
 import player
+import peer
 
 user_commands = {
     'add......': 'add a new friend',
@@ -50,27 +51,24 @@ def play_game():
 
     NOT CURRENTLY A SECURE AND TRUSTLESS IMPLEMENTATION
     """
-    raise NotImplementError  # temporary
+    raise NotImplementedError  # temporary
     return None              # also temporary
 
     slf_score = 0
     opp_score = 0
 
-    # "play against friend or on public network?"
-
-    # establish connection with socket(s)
+    # get peer address
+    host = peer.get_opp_ip()  # dummy function; not yet implemented
+    port = 75865
+    opp_addr = (host, port)
 
     # determine first dealer (THIS IS NOT SECURE AND TRUSTLESS)
-    first_pass = True
-    while first_pass or opp_rand == slf_rand:
-        first_pass == False
-        opp_rand = get_random_from_opponent()  # dummy function; not yet implemented
-        slf_rand = random.random()
+    slf_draw = random.random()
+    opp_draw = peer.exchange(str(opp_addr), slf_draw)  # dummy function; not yet implemented
 
-    if opp_rand > slf_rand:
-        dealer = 1
-    else:
-        dealer = 0
+    # set dealer flag
+    dealer = 0 if int(slf_draw) < int(opp_draw) else 1
+
 
     """
     game loop
