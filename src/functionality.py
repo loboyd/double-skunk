@@ -17,7 +17,7 @@ def deal():
 
 def card_suite(card):
     """Return the suite index of a card (integer represented)
-    
+
     TODO:
     add `return string` capability with st=None input"""
     return card % 4
@@ -25,7 +25,7 @@ def card_suite(card):
 
 def card_rank(card):
     """Return the rank index of a card (integer represented)
-    
+
     TODO:
     add `return string` capability with st=None input"""
     return card / 4
@@ -78,14 +78,14 @@ def count_fifteens(hand, starter, total=15):
     if starter != -1:
         hand = [starter] + hand
         hand = map(card_value, hand)
-    
+
     # base case
     if len(hand) == 1:
         if total == hand[0]:
             return 1
         else:
             return 0
-    
+
     # recursively call fifteens() on the cases with and without using the first card
     else:
         return count_fifteens(hand[1:], -1, total-hand[0]) + count_fifteens(hand[1:], -1, total)
@@ -97,7 +97,7 @@ def count_run(hand, starter):
     # add the starter to the hand
     hand += [starter]
     hand = sorted(hand)
-    
+
     return 0
 
 
@@ -106,9 +106,9 @@ def count_pairs(hand, starter):
     WRITE UNIT TEST FOR THIS"""
     # add the starter to the hand
     hand += [starter]
-    
+
     score = 0
-    
+
     n = len(hand)
     for i in xrange(n-1):
         for j in xrange(i+1,n):
