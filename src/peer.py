@@ -12,7 +12,7 @@ def exchange(addr, send_data):
     it will hang (should probably implement a timeout in the future)."""
 
     host = addr[0]
-    port = addr[1] #Reserve a port for your service
+    port = addr[1]
 
     sent = 0
     received = 0
@@ -20,36 +20,32 @@ def exchange(addr, send_data):
     while not (sent and received):
         # try being the client
         if not received:
+            s = socket.socket()
+            s.settimeout(0.1)
+
             try:
-                s = socket.socket()
-                s.settimeout(0.1)
-                s.connect((host, port))
+                s.connect(addr)
                 recv_data = s.recv(1024)
                 received = 1
-                s.close()
             except:
                 pass
+
+            s.close()
 
         # try being the server
         if not sent:
-            try:
-                s = socket.socket()
-                #s.settimeout(0.1)
-                s.bind(('', port))
-                s.listen(5)
-                c, _ = s.accept()
-                c.send(slf)
-                c.close()
-                #s.shutdown(socket.SHUT_RD)
-                sent = 1
-            except:
-                #print "attempting to send"
-                pass
+            s = socket.socket()
+            s.bind(('', port))
+            s.listen(5)
+            c, _ = s.accept()
+            c.send(send_data)
+            c.close()
+            sent = 1
 
-    s.close
+    return recv_data
 
 def get_peer_ip():
-    """Get IP address of a friend.
+    """Get IP address of a friend. (DO SOME SANITY CHECKING HERE.)
     Eventually, nodes should publish their IP's to a server along with unique keys so that
     peer nodes can just query the server. For true peer-to-peer, some type of routing would
     need to be implemented."""
