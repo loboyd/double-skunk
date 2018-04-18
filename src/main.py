@@ -51,8 +51,6 @@ def play_game():
 
     NOT CURRENTLY A SECURE AND TRUSTLESS IMPLEMENTATION
     """
-    raise NotImplementedError  # temporary
-    return None              # also temporary
 
     slf_score = 0
     opp_score = 0
@@ -64,11 +62,33 @@ def play_game():
 
     # determine first dealer (THIS IS NOT SECURE AND TRUSTLESS)
     slf_draw = random.random()
-    opp_draw = peer.exchange(str(opp_addr), slf_draw)  # dummy function; not yet implemented
-
-    # set dealer flag
+    opp_draw = peer.exchange(str(opp_addr), str(slf_draw))
     dealer = 0 if int(slf_draw) < int(opp_draw) else 1
 
+    game_over = 0
+
+    # main game loop
+    while not game_over:
+        # deal cards
+        hand, starter_card = functionality.deal(dealer)
+
+        # perform discard
+        crib = functionality.get_crib(dealer, hand)
+
+        # reveal starter
+        reveal_starter(starter_card)
+
+        # pegging phase
+        slf_score, opp_score = pegging_play(dealer, slf_score, opp_score)
+
+        # count hands and crib
+        if not check_game_over(slf_score, opp_score):
+            slf_score, opp_score = functionality.count_hands(dealer, hand, crib)
+
+            if check_game_over(slf_score, opp_score):
+                break
+        else:
+            break
 
     """
     game loop
@@ -78,12 +98,6 @@ def play_game():
       - the play (pegging phase)
       - count hands and crib
     """
-
-
-    # deal cards (THIS IS NOT SECURE AND TRUSTLESS)
-    # generate seed to ensure identical shuffles
-
-
 
 def add_friend():
     """Saves a new friend to the friend list"""

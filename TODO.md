@@ -25,18 +25,23 @@ Ideally, this document will contain "everything" that should be completed. I put
   - [ ] friends: see friend list (probably pickled dictionary)
   - [ ] name: edit your username (probably also pickled)
   - [ ] new: enter new game
-    - [ ] outline main game loop
+    - [x] outline main game loop
+    - [ ] implement reveal_starter_card()
+    - [ ] implement pegging_play()
+    - [ ] implement check game over()
   - [x] help: see this list of commands
   - [x] quit: quit game
 ## functionality.py
-- [ ] Come up with a nice way of sorting the hands (It would be really nice if the numbers representing the cards happened to share the preferred ordering of the cards -- this way, the native sorted() could be used. -- EDIT -- I think this is working now, but it should probably be double-checked
-- [ ] Write a function to count points
+- [x] Come up with a nice way of sorting the hands (It would be really nice if the numbers representing the cards happened to share the preferred ordering of the cards -- this way, the native sorted() could be used. -- EDIT -- I think this is working now, but it should probably be double-checked
+- [ ] Write a function to count points (count hands)
   - [ ] Finish design for the score_hand() function
   - [x] Finish pairs()
   - [x] Finish fifteens
   - [ ] Finish count_run()
   - [ ] Write count_flush()
   - [ ] Write unit tests for all functions called from score_hand()
+- [ ] implement deal()
+- [ ] implement get_crib()
 ## player.py
 - [ ] Redesign player.py to be used for peer-to-peer
 - [ ] Write peg() method
