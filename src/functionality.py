@@ -1,18 +1,31 @@
 import random
+import peer
 
 # general game tables
 suites = ['S', 'D', 'C', 'H']
 ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'X', 'J', 'Q', 'K']
 
 
-def deal():
-    """Get random sample of 13 cards represented by integers between 0 and 51;
-    first six cards are Alice's hand, next six are Bob's hand, last is starter card"""
+def deal(dealer, opp_addr):
+    """Get random sample of 13 cards; the first six cards are the dealer's hand,
+    the next six are the other player's hand, last is starter card"""
+    # establish seed
+    if dealer:
+        seed = str(random.random())
+        peer.send(str(seed))
+    else:
+        seed = peer.recv()
+
+    random.seed(seed)
+
     temp = random.sample(range(52), 13)
-    hand1 = temp[:6]
-    hand2 = temp[6:12]
+    if dealer:
+        hand = temp[:6]
+    else:
+        hand = temp[6:12]
     starter = temp[12]
-    return sorted(hand1), sorted(hand2), starter
+
+    return sorted(hand), starter
 
 
 def card_suite(card):
