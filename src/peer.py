@@ -24,7 +24,7 @@ def recv(addr):
     peer is waiting to send data. THIS WILL HANG IF DATA IS NOT RECEIVED
     SUCCESSFULLY; TIMEOUT SHOULD BE IMPLEMENTED AT SOME POINT"""
     host = addr[0]
-    port addr[1]
+    port = addr[1]
 
     received = 0
 

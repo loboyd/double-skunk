@@ -70,16 +70,16 @@ def play_game():
     # main game loop
     while not game_over:
         # deal cards
-        hand, starter_card = functionality.deal(dealer)
+        hand, starter_card = functionality.deal(dealer, opp_addr)
 
         # perform discard
-        crib = functionality.get_crib(dealer, hand)
+        crib = functionality.get_crib(dealer, hand, opp_addr)
 
         # reveal starter
         reveal_starter(starter_card)
 
         # pegging phase
-        slf_score, opp_score = pegging_play(dealer, slf_score, opp_score)
+        slf_score, opp_score = pegging_play(dealer, slf_score, opp_score, opp_addr)
 
         # count hands and crib
         if not check_game_over(slf_score, opp_score):
@@ -89,15 +89,6 @@ def play_game():
                 break
         else:
             break
-
-    """
-    game loop
-      - deal cards
-      - discard crib cards
-      - reveal starter card
-      - the play (pegging phase)
-      - count hands and crib
-    """
 
 def add_friend():
     """Saves a new friend to the friend list"""
