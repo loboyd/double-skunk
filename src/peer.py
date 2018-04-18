@@ -41,6 +41,8 @@ def recv(addr):
 
         s.close()
 
+    return recv_data
+
 def exchange(addr, send_data):
     """Exchange two pieces of data with socket connections. This function
     assumes both peers call it at approximately the same time. Otherwise,
