@@ -40,3 +40,5 @@ Ideally, this document will contain "everything" that should be completed. I put
 ## player.py
 - [ ] Redesign player.py to be used for peer-to-peer
 - [ ] Write peg() method
+## peer.py
+- [ ] implement sanity checking for user input IP address in get_peer_ip()

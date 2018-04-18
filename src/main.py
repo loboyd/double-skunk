@@ -59,7 +59,7 @@ def play_game():
 
     # get peer address
     host = peer.get_opp_ip()  # dummy function; not yet implemented
-    port = 75865
+    port = 55693
     opp_addr = (host, port)
 
     # determine first dealer (THIS IS NOT SECURE AND TRUSTLESS)
@@ -98,7 +98,6 @@ def view_friends_list():
 def edit_user_name():
     """Allows user to edit public username"""
     raise NotImplementedError
-
 
 def main():
     # entry statement
