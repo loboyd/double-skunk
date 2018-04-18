@@ -40,10 +40,12 @@ Ideally, this document will contain "everything" that should be completed. I put
   - [ ] Finish count_run()
   - [ ] Write count_flush()
   - [ ] Write unit tests for all functions called from score_hand()
-- [ ] implement deal()
+- [x] implement deal()
 - [ ] implement get_crib()
 ## player.py
 - [ ] Redesign player.py to be used for peer-to-peer
 - [ ] Write peg() method
 ## peer.py
 - [ ] implement sanity checking for user input IP address in get_peer_ip()
+- [ ] implement send()
+- [ ] implement recv()
