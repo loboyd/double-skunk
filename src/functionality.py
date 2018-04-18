@@ -12,9 +12,9 @@ def deal(dealer, opp_addr):
     # establish seed
     if dealer:
         seed = str(random.random())
-        peer.send(str(seed))
+        peer.send(opp_addr, str(seed))
     else:
-        seed = peer.recv()
+        seed = peer.recv(opp_addr)
 
     random.seed(seed)
 

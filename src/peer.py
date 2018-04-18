@@ -5,6 +5,41 @@ import socket #import socket module
 import time
 import random
 
+def send(addr, send_data):
+    """Send a piece of data to a peer. The function assumes the other peer
+    is listening. THIS WILL HANG IF DATA IS NOT SENT SUCCESSFULLY; TIMEOUT
+    SHOULD BE IMPLEMENTED AT SOME POINT"""
+    host = addr[0]
+    port = addr[1]
+
+    s = socket.socket()
+    s.bind(('', port))
+    s.listen(5)
+    c, _ = s.accept()
+    c.send(send_data)
+    c.close()
+
+def recv(addr):
+    """Receive a piece of data from a peer. The function assumes the other
+    peer is waiting to send data. THIS WILL HANG IF DATA IS NOT RECEIVED
+    SUCCESSFULLY; TIMEOUT SHOULD BE IMPLEMENTED AT SOME POINT"""
+    host = addr[0]
+    port addr[1]
+
+    received = 0
+
+    while not received:
+        s = socket.socket()
+        s.settimeout(0.1)
+
+        try:
+            s.connect(addr)
+            recv_data = s.recv(1024)
+            received = 1
+        except:
+            pass
+
+        s.close()
 
 def exchange(addr, send_data):
     """Exchange two pieces of data with socket connections. This function
