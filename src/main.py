@@ -63,7 +63,7 @@ def play_game():
     # determine first dealer (THIS IS NOT SECURE AND TRUSTLESS)
     slf_draw = random.random()
     opp_draw = peer.exchange(opp_addr, str(slf_draw))
-    dealer = 0 if int(slf_draw) < int(opp_draw) else 1
+    dealer = 0 if float(slf_draw) < float(opp_draw) else 1
 
     game_over = 0
 
