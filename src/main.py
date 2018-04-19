@@ -56,7 +56,7 @@ def play_game():
     opp_score = 0
 
     # get peer address
-    host = peer.get_opp_ip()  # dummy function; not yet implemented
+    host = peer.get_peer_ip()  # dummy function; not yet implemented
     port = 55693
     opp_addr = (host, port)
 
@@ -69,7 +69,7 @@ def play_game():
 
     # main game loop
     while not game_over:
-        # deal cards
+        # deal cards (ALSO NOT SECURE AND TRUSTLESS)
         slf_hand, opp_hand, starter_card = functionality.deal(dealer, opp_addr)
 
         # perform discard
