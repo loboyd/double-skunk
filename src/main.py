@@ -107,7 +107,7 @@ def main():
             print("enter \"help\" to go back\n")
         elif usr == 'new':
             # enter new game
-            visual.play_game()
+            play_game()
         elif usr == 'help':
             print
             visual.print_user_commands(user_commands)
