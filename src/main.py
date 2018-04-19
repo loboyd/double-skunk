@@ -80,15 +80,14 @@ def play_game():
 
         # pegging phase
         slf_score, opp_score = pegging_play(dealer, slf_score, opp_score, opp_addr)
+        if check_game_over(slf_score, opp_score):
+            break
 
         # count hands and crib
-        if not check_game_over(slf_score, opp_score):
-            slf_score, opp_score = functionality.count_hands(dealer, hand, crib)
-
-            if check_game_over(slf_score, opp_score):
-                break
-        else:
+        slf_score, opp_score = functionality.count_hands(dealer, hand, crib)
+        if check_game_over(slf_score, opp_score):
             break
+
 
 def add_friend():
     """Saves a new friend to the friend list"""
