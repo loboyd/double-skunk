@@ -20,6 +20,7 @@ Ideally, this document will contain "everything" that should be completed. I put
 - [x] Write print_commands() for user commands
 - [ ] Maintain user command list order
 - [x] Write main client loop
+- [ ] Write display for first dealer
 - [ ] Write code for all user commands
   - [ ] add: add a new friend (name, IP address)
   - [ ] friends: see friend list (probably pickled dictionary)
