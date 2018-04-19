@@ -70,7 +70,7 @@ def play_game():
     # main game loop
     while not game_over:
         # deal cards
-        hand, starter_card = functionality.deal(dealer, opp_addr)
+        slf_hand, opp_hand, starter_card = functionality.deal(dealer, opp_addr)
 
         # perform discard
         crib = functionality.get_crib(dealer, hand, opp_addr)
@@ -84,7 +84,7 @@ def play_game():
             break
 
         # count hands and crib
-        slf_score, opp_score = functionality.count_hands(dealer, hand, crib)
+        slf_score, opp_score = functionality.count_hands(dealer, slf_hand, opp_hand, crib)
         if check_game_over(slf_score, opp_score):
             break
 

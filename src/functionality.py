@@ -20,12 +20,14 @@ def deal(dealer, opp_addr):
 
     temp = random.sample(range(52), 13)
     if dealer:
-        hand = temp[:6]
+        slf_hand = temp[:6]
+        opp_hand = temp[6:12]
     else:
-        hand = temp[6:12]
+        slf_hand = temp[6:12]
+        opp_hand = temp[:6]
     starter = temp[12]
 
-    return sorted(hand), starter
+    return sorted(slf_hand), sorted(opp_hand), starter
 
 
 def card_suite(card):
