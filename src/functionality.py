@@ -5,7 +5,6 @@ import peer
 suites = ['S', 'D', 'C', 'H']
 ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'X', 'J', 'Q', 'K']
 
-
 def deal(dealer, opp_addr):
     """Get random sample of 13 cards; the first six cards are the dealer's hand,
     the next six are the other player's hand, last is starter card"""
@@ -29,14 +28,12 @@ def deal(dealer, opp_addr):
 
     return sorted(slf_hand), sorted(opp_hand), starter
 
-
 def card_suite(card):
     """Return the suite index of a card (integer represented)
 
     TODO:
     add `return string` capability with st=None input"""
     return card % 4
-
 
 def card_rank(card):
     """Return the rank index of a card (integer represented)
@@ -45,7 +42,6 @@ def card_rank(card):
     add `return string` capability with st=None input"""
     return card / 4
 
-
 def card_value(card):
     """Return the point value of a card (integer represented)"""
     if card_rank(card) == 10 or card_rank(card) == 11 or card_rank(card) == 12:
@@ -53,11 +49,9 @@ def card_value(card):
     else:
         return card_rank(card) + 1  # +1 because ranks are 1 larger than their indices
 
-
 def card_string(card):
     """Return a string describing a card such as 6 H for six of hearts"""
     return "{0}-{1}".format(ranks[card_rank(card)], suites[card_suite(card)])
-
 
 def score_hand(hand, starter):
     """Returns the total score of a starter card paired with a hand
@@ -85,7 +79,6 @@ def score_hand(hand, starter):
     #         flush_score[count_flush(hand, starter)] + \
     #         nobs_score*count_nobs(hand, starter)
 
-
 def count_fifteens(hand, starter, total=15):
     """Return number of unique fifteen-pairs of a hand paired with a starter card
     WRITE UNIT TEST FOR THIS"""
@@ -105,7 +98,6 @@ def count_fifteens(hand, starter, total=15):
     else:
         return count_fifteens(hand[1:], -1, total-hand[0]) + count_fifteens(hand[1:], -1, total)
 
-
 def count_run(hand, starter):
     """Return the length of the largest run of a hand paired with a starter card
     NOT COMPLETE"""
@@ -114,7 +106,6 @@ def count_run(hand, starter):
     hand = sorted(hand)
 
     return 0
-
 
 def count_pairs(hand, starter):
     """Return number of pairs of a hand paired with a starter card
@@ -131,11 +122,9 @@ def count_pairs(hand, starter):
                 score += 1
     return score
 
-
 def count_flush(hand, starter,crib=False):
     """Return the length of the largest flush (greater than 3) of a hand paired with a starter card"""
     return 0
-
 
 def count_nobs(hand, starter):
     """Return 1 if a hand paired with a starter card contains nobs, 0 otherwise

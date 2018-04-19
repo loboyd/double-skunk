@@ -17,14 +17,12 @@ user_commands = {
     'quit.....': 'quit game'
 }
 
-
 def exit_client():
     """Say goodbye and exit client"""
     visual.clear_screen()
     visual.print_title_bar()
     print("\nSee you next time!\n")
     exit()
-
 
 def play_game():
     """Facilitates gameplay between two peers -- friends or public
@@ -68,16 +66,13 @@ def play_game():
         if check_game_over(slf_score, opp_score):
             break
 
-
 def add_friend():
     """Saves a new friend to the friend list"""
     raise NotImplementedError
 
-
 def view_friends_list():
     """prints friends list to screen"""
     raise NotImplementedError
-
 
 def edit_user_name():
     """Allows user to edit public username"""
@@ -121,47 +116,6 @@ def main():
         else:
             print('That was an invalid entry. Enter \'help\' to see the available commands.')
 
-
 if __name__ == "__main__":
     main()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-# THE OUTLINE BELOW WILL BE USEFUL LATER ON
-
-# ==============================================================================
-# - P2P OUTLINE/DESIGN ---------------------------------------------------------
-# ==============================================================================
-
-
-# there will probably be something of a "main menu" where users can start a 
-# game, update their user info (display name, etc.), add a new peer manually
-
-# find/connect to peer
-
-# exchange info (username and whatever else)
-
-# perform "coin flip" for first dealer (this is not trivial)
-
-# game loop
-
-    # deal cards
-
-    # discard to crib
-
-    # pegging phase
-
-    # reveal starter card
-
-    # count hands

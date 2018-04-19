@@ -65,8 +65,7 @@ class Player(object):
         for i in xrange(1, len(self.hand) + 1):
             print("| {0}".format(str(i))),
         print('|\n')
-    
-    
+
     def peg(self):
         """TO-BE-COMPLETED"""
         return 0
