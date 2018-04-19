@@ -62,7 +62,7 @@ def play_game():
 
     # determine first dealer (THIS IS NOT SECURE AND TRUSTLESS)
     slf_draw = random.random()
-    opp_draw = peer.exchange(str(opp_addr), str(slf_draw))
+    opp_draw = peer.exchange(opp_addr, str(slf_draw))
     dealer = 0 if int(slf_draw) < int(opp_draw) else 1
 
     game_over = 0
@@ -132,8 +132,7 @@ def main():
             print("enter \"help\" to go back\n")
         elif usr == 'new':
             # enter new game
-            print("functionality yet to be added")
-            print("enter \"help\" to go back\n")
+            play_game()
         elif usr == 'help':
             print
             print_user_commands()
