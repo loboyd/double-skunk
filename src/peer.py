@@ -13,6 +13,7 @@ def send(addr, send_data):
     port = addr[1]
 
     s = socket.socket()
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind(('', port))
     s.listen(5)
     c, _ = s.accept()
@@ -31,6 +32,7 @@ def recv(addr):
     while not received:
         s = socket.socket()
         s.settimeout(0.1)
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
         try:
             s.connect(addr)
@@ -59,6 +61,7 @@ def exchange(addr, send_data):
         if not received:
             s = socket.socket()
             s.settimeout(0.1)
+            s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
             try:
                 s.connect(addr)
@@ -72,6 +75,7 @@ def exchange(addr, send_data):
         # try being the server
         if not sent:
             s = socket.socket()
+            s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             s.bind(('', port))
             s.listen(5)
             c, _ = s.accept()
