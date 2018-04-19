@@ -17,27 +17,6 @@ user_commands = {
 }
 
 
-def print_user_commands():
-    """Print list of user commands and their descriptions"""
-    for c in user_commands:
-        print("{0}{1}".format(c, user_commands[c]))
-    print
-
-
-def clear_screen():
-    """Clears the console.
-
-    UPDATE TO BE CROSS-PLATFORM"""
-
-    import os
-    os.system('clear')
-
-
-def print_title_bar():
-    """Prints the double-skunk title bar"""
-    print("====DOUBLE-SKUNK=============================")
-
-
 def exit_client():
     """Say goodbye and exit client"""
     clear_screen()
