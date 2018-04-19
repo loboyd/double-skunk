@@ -6,6 +6,7 @@ import random
 import functionality as func
 import player
 import peer
+import visual
 
 user_commands = {
     'add......': 'add a new friend',
@@ -19,8 +20,8 @@ user_commands = {
 
 def exit_client():
     """Say goodbye and exit client"""
-    clear_screen()
-    print_title_bar()
+    visual.clear_screen()
+    visual.print_title_bar()
     print("\nSee you next time!\n")
     exit()
 
@@ -84,17 +85,17 @@ def edit_user_name():
 
 def main():
     # entry statement
-    clear_screen()
-    print_title_bar()
+    visual.clear_screen()
+    visual.print_title_bar()
     print("\nWelcome to double-skunk!")
     print("Enter the following commands to navigate:\n")
-    print_user_commands()
+    visual.print_user_commands()
 
     # client loop
     while True:
         usr = raw_input("")
-        clear_screen()
-        print_title_bar()
+        visual.clear_screen()
+        visual.print_title_bar()
         print
 
         if usr == 'add':
@@ -111,10 +112,10 @@ def main():
             print("enter \"help\" to go back\n")
         elif usr == 'new':
             # enter new game
-            play_game()
+            visual.play_game()
         elif usr == 'help':
             print
-            print_user_commands()
+            visual.print_user_commands()
         elif usr == 'quit' or usr == 'exit':
             exit_client()
         else:
