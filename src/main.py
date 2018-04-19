@@ -70,10 +70,10 @@ def play_game():
     # main game loop
     while not game_over:
         # deal cards (ALSO NOT SECURE AND TRUSTLESS)
-        slf_hand, opp_hand, starter_card = functionality.deal(dealer, opp_addr)
+        slf_hand, opp_hand, starter_card = func.deal(dealer, opp_addr)
 
         # perform discard
-        crib = functionality.get_crib(dealer, hand, opp_addr)
+        crib = func.get_crib(dealer, hand, opp_addr)
 
         # reveal starter
         reveal_starter(starter_card)
@@ -84,7 +84,7 @@ def play_game():
             break
 
         # count hands and crib
-        slf_score, opp_score = functionality.count_hands(dealer, slf_hand, opp_hand, crib)
+        slf_score, opp_score = func.count_hands(dealer, slf_hand, opp_hand, crib)
         if check_game_over(slf_score, opp_score):
             break
 
