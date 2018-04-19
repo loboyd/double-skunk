@@ -84,7 +84,7 @@ def main():
     visual.print_title_bar()
     print("\nWelcome to double-skunk!")
     print("Enter the following commands to navigate:\n")
-    visual.print_user_commands()
+    visual.print_user_commands(user_commands)
 
     # client loop
     while True:
@@ -110,7 +110,7 @@ def main():
             visual.play_game()
         elif usr == 'help':
             print
-            visual.print_user_commands()
+            visual.print_user_commands(user_commands)
         elif usr == 'quit' or usr == 'exit':
             exit_client()
         else:
