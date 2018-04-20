@@ -14,7 +14,7 @@ def send(addr, send_data):
 
     s = socket.socket()
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    s.bind(('', port))
+    s.bind(('0.0.0.0', port))
     s.listen(5)
     c, _ = s.accept()
     c.send(send_data)
@@ -76,7 +76,7 @@ def exchange(addr, send_data):
         if not sent:
             s = socket.socket()
             s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            s.bind(('', port))
+            s.bind(('0.0.0.0', port))
             s.listen(5)
             c, _ = s.accept()
             c.send(send_data)
