@@ -27,6 +27,8 @@ Ideally, this document will contain "everything" that should be completed. I put
   - [ ] name: edit your username (probably also pickled)
   - [ ] new: enter new game
     - [x] outline main game loop
+    - [x] implment get_crib() function
+    - [ ] implement discard() function
     - [ ] implement reveal_starter_card()
     - [ ] implement pegging_play()
     - [ ] implement check game over()
