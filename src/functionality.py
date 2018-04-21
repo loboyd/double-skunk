@@ -53,6 +53,21 @@ def card_string(card):
     """Return a string describing a card such as 6 H for six of hearts"""
     return "{0}-{1}".format(ranks[card_rank(card)], suites[card_suite(card)])
 
+def discard(hand):
+    """Display hand and return user selected discards and updated hand"""
+    visual.clear_screen()
+    visual.print_title_bar()
+
+    usr = raw_input("\nSelect two cards to discard.\n")
+    usr = [int(s) for s in usr.split(' ')]
+    discards = [hand[i] for i in usr]
+
+    del hand[usr[0]]
+    del hand[usr[1]]
+
+    return discards, hand
+
+
 def get_crib(dealer, hand, addr):
     """Return crib after performing discard and exchanging card info with peer"""
     slf_crib_cards, hand = discard(hand)
