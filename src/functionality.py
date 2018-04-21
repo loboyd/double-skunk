@@ -50,9 +50,13 @@ def card_value(card):
     else:
         return card_rank(card) + 1  # +1 because ranks are 1 larger than their indices
 
-def card_string(card):
-    """Return a string describing a card such as 6 H for six of hearts"""
-    return "{0}-{1}".format(ranks[card_rank(card)], suites[card_suite(card)])
+def card_rank_string(card):
+    """Return a string describing the rank of a card"""
+    return ranks[card_rank(card)]
+
+def card_suite_string(card):
+    """Return a string describing the suite of a card"""
+   return suites[card_suite(card)]
 
 def discard(hand):
     """Display hand and return user selected discards and updated hand"""
