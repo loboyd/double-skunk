@@ -53,6 +53,17 @@ def card_string(card):
     """Return a string describing a card such as 6 H for six of hearts"""
     return "{0}-{1}".format(ranks[card_rank(card)], suites[card_suite(card)])
 
+def get_crib(dealer, hand, addr):
+    """Return crib after performing discard and exchanging card info with peer"""
+    slf_crib_cards, hand = discard(hand)
+    slf_crib_cards_string = "{0} {1}".format(slf_crib_cards[0], slf_crib_cards[1])
+
+    opp_crib_cards_string = peer.exchange(addr, slf_crib_cards_string)
+    opp_crib_cards = opp_crib_cards_string.split(' ')
+
+    crib = sorted(slf_crib_cards + opp_crib_cards)
+    return crib, hand
+
 def score_hand(hand, starter):
     """Returns the total score of a starter card paired with a hand
     NOT COMPLETED

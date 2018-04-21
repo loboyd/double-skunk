@@ -52,7 +52,7 @@ def play_game():
         slf_hand, opp_hand, starter_card = func.deal(dealer, opp_addr)
 
         # perform discard
-        crib = func.get_crib(dealer, hand, opp_addr)
+        crib, hand = func.get_crib(dealer, hand, opp_addr)
 
         # reveal starter
         reveal_starter(starter_card)
