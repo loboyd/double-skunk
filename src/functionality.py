@@ -59,7 +59,10 @@ def discard(hand):
     visual.clear_screen()
     visual.print_title_bar()
 
-    usr = raw_input("\nSelect two cards to discard.\n")
+    usr = print("\nSelect two cards to discard.\n\n")
+
+    visual.print_hand(hand)
+
     usr = [int(s) for s in usr.split(' ')]
     discards = [hand[i] for i in usr]
 
