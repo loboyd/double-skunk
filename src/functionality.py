@@ -1,5 +1,6 @@
 import random
 import peer
+import visual
 
 # general game tables
 suites = ['S', 'D', 'C', 'H']
