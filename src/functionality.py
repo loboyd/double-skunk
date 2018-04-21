@@ -56,17 +56,18 @@ def card_rank_string(card):
 
 def card_suite_string(card):
     """Return a string describing the suite of a card"""
-   return suites[card_suite(card)]
+    return suites[card_suite(card)]
 
 def discard(hand):
     """Display hand and return user selected discards and updated hand"""
     visual.clear_screen()
     visual.print_title_bar()
 
-    usr = print("\nSelect two cards to discard.\n\n")
+    print("\nSelect two cards to discard.\n")
 
     visual.print_hand(hand)
 
+    usr = raw_input()
     usr = [int(s) for s in usr.split(' ')]
     discards = [hand[i] for i in usr]
 
