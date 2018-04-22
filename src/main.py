@@ -4,7 +4,6 @@ This file contains the main game loop.
 
 import random
 import functionality as func
-import player
 import peer
 import visual
 
@@ -53,9 +52,6 @@ def play_game():
 
         # perform discard
         crib, slf_hand = func.get_crib(dealer, slf_hand, opp_addr)
-
-        # reveal starter
-        reveal_starter(starter_card)
 
         # pegging phase
         slf_score, opp_score = pegging_play(dealer, slf_score, opp_score, opp_addr)

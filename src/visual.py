@@ -60,3 +60,5 @@ def print_hand(hand):
         print(index_line)
         print "\n"
 
+def reveal_starter(card):
+    """"""
