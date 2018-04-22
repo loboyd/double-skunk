@@ -29,27 +29,27 @@ def print_hand(cards):
     """Print hand up to six cards with rank, suite, and hand index in
     the following format:
 
-    | A | 2 | 3 | X | J | Q |
-    | C | H | D | D | S | H |
-    -------------------------
-    | 1 | 2 | 3 | 4 | 5 | 6 |
+    | A || 2 || 3 || X || J || Q |
+    | C || H || D || D || S || H |
+    ------------------------------
+      1    2    3    4    5    6
 
     """
     n = len(cards)
     if n == 0:
-        print "\n\n\n\n"
+        print "\n\n\n\n\n"
     else:
         # build line strings
-        rank_line  = "| "
-        suite_line = "| "
-        div_line   = "-"
-        index_line = "| "
+        rank_line  = ''
+        suite_line = ''
+        div_line   = ''
+        index_line = ''
         ct = 1
         for c in cards:
-            rank_line  += "{0} | ".format(func.card_rank_string(c))
-            suite_line += "{0} | ".format(func.card_suite_string(c))
-            div_line   += "----"
-            index_line += "{0} | ".format(ct)
+            rank_line  += "| {0} |".format(func.card_rank_string(c))
+            suite_line += "| {0} |".format(func.card_suite_string(c))
+            div_line   += "-----"
+            index_line += "  {0}  ".format(ct)
             ct += 1
 
         # print them
@@ -64,17 +64,17 @@ def print_table(cards, mask, starter):
     """Print the cards which have been played in pegging; use the mask to determine
     the ownership of the cards"""
     n = len(cards)
-    if n == 0:
-        print("\n\n\n\n")
-    else:
-        cards = zip(cards, mask)
-        # build line strings
-        starter_line = ' '*45 + 'STARTER'
-        top_line = ''
-        mid_line = ''
-        bot_line = ''
 
-        # position cards based on ownership
+    # set up line strings
+    starter_line = ' '*44 + "STARTER"
+    top_line = ''
+    mid_line = ''
+    bot_line = ''
+
+    if n > 0:
+        cards = zip(cards, mask)
+
+        # build line strings with position based on ownership
         for c in cards:
             # build card pieces
             card_top = "| {0} |".format(func.card_rank_string(c[0]))
@@ -89,10 +89,10 @@ def print_table(cards, mask, starter):
                 mid_line += card_bot
                 bot_line += "     "
 
-        # include starter card
-        starter_buffer = ' '*(45-len(top_line))
-        top_line += starter_buffer + "| {0} |".format(func.card_rank_string(starter))
-        mid_line += starter_buffer + "| {0} |".format(func.card_suite_string(starter))
+    # include starter card
+    starter_buffer = ' '*(45-len(top_line))
+    top_line += starter_buffer + "| {0} |".format(func.card_rank_string(starter))
+    mid_line += starter_buffer + "| {0} |".format(func.card_suite_string(starter))
 
     print('\n')
     print(starter_line)
