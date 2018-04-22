@@ -53,12 +53,50 @@ def print_hand(cards):
             ct += 1
 
         # print them
-        print"\n"
+        print('\n')
         print(rank_line)
         print(suite_line)
         print(div_line)
         print(index_line)
-        print "\n"
+        print('\n')
 
-def reveal_starter(card):
-    """"""
+def print_table(cards, mask, starter):
+    """Print the cards which have been played in pegging; use the mask to determine
+    the ownership of the cards"""
+    n = len(cards)
+    if n == 0:
+        print("\n\n\n\n")
+    else:
+        cards = zip(cards, mask)
+        # build line strings
+        starter_line = ' '*45 + 'STARTER'
+        top_line = ''
+        mid_line = ''
+        bot_line = ''
+
+        # position cards based on ownership
+        for c in cards:
+            # build card pieces
+            card_top = "| {0} |".format(func.card_rank_string(c[0]))
+            card_bot = "| {0} |".format(func.card_suite_string(c[0]))
+
+            if c[1]:
+                top_line += "     "
+                mid_line += card_top
+                bot_line += card_bot
+            else:
+                top_line += card_top
+                mid_line += card_bot
+                bot_line += "     "
+
+        # include starter card
+        starter_buffer = ' '*(45-len(top_line))
+        top_line += starter_buffer + "| {0} |".format(func.card_rank_string(starter))
+        mid_line += starter_buffer + "| {0} |".format(func.card_suite_string(starter))
+
+    print('\n')
+    print(starter_line)
+    print(top_line)
+    print(mid_line)
+    print(bot_line)
+    print('\n')
