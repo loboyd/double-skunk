@@ -68,11 +68,11 @@ def discard(hand):
     visual.print_hand(hand)
 
     usr = raw_input()
-    usr = [int(s) for s in usr.split(' ')]
+    usr = [int(s) - 1 for s in usr.split(' ')]  # -1 because hand is 1-indexed
     discards = [hand[i] for i in usr]
 
-    del hand[usr[0]]
-    del hand[usr[1]]
+    # slice discards out from hand
+    hand = hand[:usr[0]] + hand[usr[0]+1:usr[1]] + hand[usr[1]+1:]
 
     return discards, hand
 
