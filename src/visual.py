@@ -48,7 +48,7 @@ def print_hand(hand):
         for c in hand:
             rank_line  += "{0} |".format(func.card_rank_string(c))
             suite_line += "{0} |".format(func.card_suite_string(c))
-            div_lin    += "----"
+            div_line   += "----"
             index_line += "{0} |".format(ct)
 
         # print them
