@@ -42,20 +42,21 @@ def print_hand(hand):
         # build line strings
         rank_line  = "| "
         suite_line = "| "
-        div_line   = "- "
+        div_line   = "-"
         index_line = "| "
         ct = 1
         for c in hand:
-            rank_line  += "{0} |".format(func.card_rank_string(c))
-            suite_line += "{0} |".format(func.card_suite_string(c))
+            rank_line  += "{0} | ".format(func.card_rank_string(c))
+            suite_line += "{0} | ".format(func.card_suite_string(c))
             div_line   += "----"
-            index_line += "{0} |".format(ct)
+            index_line += "{0} | ".format(ct)
+            ct += 1
 
         # print them
-        print"\n\n"
+        print"\n"
         print(rank_line)
         print(suite_line)
         print(div_line)
         print(index_line)
-        print "\n\n"
+        print "\n"
 
