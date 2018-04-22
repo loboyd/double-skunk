@@ -25,7 +25,7 @@ def first_dealer_message(dealer):
     print("\n{} will be the first dealer.".format("YOU" if dealer else "YOUR OPPONENT"))
     usr = raw_input("\n\nPress ENTER to continue to the game.")
 
-def print_hand(cards):
+def print_hand(cards, crib=0):
     """Print hand up to six cards with rank, suite, and hand index in
     the following format:
 
@@ -36,14 +36,15 @@ def print_hand(cards):
 
     """
     n = len(cards)
-    if n == 0:
-        print "\n\n\n\n\n"
-    else:
+
+    # set up line strings
+    rank_line  = ''
+    suite_line = ''
+    div_line   = ''
+    index_line = ''
+
+    if n > 0:
         # build line strings
-        rank_line  = ''
-        suite_line = ''
-        div_line   = ''
-        index_line = ''
         ct = 1
         for c in cards:
             rank_line  += "| {0} |".format(func.card_rank_string(c))
@@ -52,13 +53,20 @@ def print_hand(cards):
             index_line += "  {0}  ".format(ct)
             ct += 1
 
-        # print them
-        print('\n')
-        print(rank_line)
-        print(suite_line)
-        print(div_line)
-        print(index_line)
-        print('\n')
+    # include crib
+    if crib:
+        crib_buffer = ' '*(35-len(rank_line))
+        rank_line  += crib_buffer + "| _ ||||"
+        suite_line += crib_buffer + "|   ||||"
+
+
+    # print them
+    print('\n')
+    print(rank_line)
+    print(suite_line)
+    print(div_line)
+    print(index_line)
+    print('\n')
 
 def print_table(cards, mask, starter):
     """Print the cards which have been played in pegging; use the mask to determine
