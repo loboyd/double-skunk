@@ -51,11 +51,15 @@ def card_value(card):
         return card_rank(card) + 1  # +1 because ranks are 1 larger than their indices
 
 def card_rank_string(card):
-    """Return a string describing the rank of a card"""
+    """Return a string describing the rank of a card or underscore for face-down"""
+    if card == -1:
+        return '_'
     return ranks[card_rank(card)]
 
 def card_suite_string(card):
-    """Return a string describing the suite of a card"""
+    """Return a string describing the suite of a card or blank space for face-down"""
+    if card == -1:
+        return ' '
     return suites[card_suite(card)]
 
 def discard(hand):
