@@ -25,7 +25,7 @@ def first_dealer_message(dealer):
     print("\n{} will be the first dealer.".format("YOU" if dealer else "YOUR OPPONENT"))
     usr = raw_input("\n\nPress ENTER to continue to the game.")
 
-def print_hand(hand):
+def print_hand(cards):
     """Print hand up to six cards with rank, suite, and hand index in
     the following format:
 
@@ -35,7 +35,7 @@ def print_hand(hand):
     | 1 | 2 | 3 | 4 | 5 | 6 |
 
     """
-    n = len(hand)
+    n = len(cards)
     if n == 0:
         print "\n\n\n\n"
     else:
@@ -45,7 +45,7 @@ def print_hand(hand):
         div_line   = "-"
         index_line = "| "
         ct = 1
-        for c in hand:
+        for c in cards:
             rank_line  += "{0} | ".format(func.card_rank_string(c))
             suite_line += "{0} | ".format(func.card_suite_string(c))
             div_line   += "----"
