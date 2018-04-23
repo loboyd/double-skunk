@@ -62,6 +62,17 @@ def card_suite_string(card):
         return ' '
     return suites[card_suite(card)]
 
+def select_cards(hand):
+    """Get user input and remove selected cards from hand (prompt must be handled outside)"""
+    usr = raw_input()
+    usr = [int(s) - 1 for s in usr.split(' ')]  # -1 because hand is 1-indexed
+    selection = [hand[i] for i in usr]
+
+    for i in sorted(usr, reverse=True):
+        del hand[i]
+
+    return selection, hand
+
 def discard(hand):
     """Display hand and return user selected discards and updated hand"""
     visual.clear_screen()
@@ -71,12 +82,7 @@ def discard(hand):
 
     visual.print_hand(hand)
 
-    usr = raw_input()
-    usr = [int(s) - 1 for s in usr.split(' ')]  # -1 because hand is 1-indexed
-    discards = [hand[i] for i in usr]
-
-    # slice discards out from hand
-    hand = hand[:usr[0]] + hand[usr[0]+1:usr[1]] + hand[usr[1]+1:]
+    discards, hand = select_cards(hand)
 
     return discards, hand
 
