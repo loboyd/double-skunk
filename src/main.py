@@ -27,15 +27,15 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
     """Facilitates pegging phase for one round of the dealing cycle"""
     table = []       # store played cards
     owner_mask = []  # store card ownership information
-    to_play = 0 if dealer else 1
     n_opp_cards = 4
+    opp_crib = 0 if dealer else 1  # dealer's opponent always has crib
+    to_play  = 0 if dealer else 1  # and is also first to play
 
     done_pegging = 0
     while not done_pegging:
         visual.clear_screen()
         visual.print_title_bar()
 
-        opp_crib = 0 if dealer else 1
         visual.print_hand([-1]*n_opp_cards, index=0, crib=opp_crib)
 
         visual.print_table(table, owner_mask, starter_card)
@@ -47,8 +47,21 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
 
         visual.print_hand(hand, crib=dealer)
 
-        tmp = raw_input()
+        # get played card
+        if to_play:
+            usr = raw_input()
+            play_card, hand = func.select_cards(hand)
+            play_card = play_card[0]
+            peer.send(str(play_card), addr)
+        else:
+            play_card = int(peer.recv(addr))
+            n_opp_cards -= 1
 
+        # update table
+        table.append(play_card)
+        owner_mask.append(to_play)
+
+        # update score
 
 def play_game():
     """Facilitates gameplay between two peers
