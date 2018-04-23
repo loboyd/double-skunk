@@ -24,6 +24,7 @@ def first_dealer_message(dealer):
     print_title_bar()
     print("\n{} will be the first dealer.".format("YOU" if dealer else "YOUR OPPONENT"))
     usr = raw_input("\n\nPress ENTER to continue to the game.")
+    print("\nWAITING FOR OPPONENT...")
 
 def print_hand(cards, crib=0, index=1):
     """Print hand up to six cards with rank, suite, and hand index in
