@@ -73,12 +73,13 @@ def select_cards(hand):
 
     return selection, hand
 
-def discard(hand):
+def discard(hand, dealer):
     """Display hand and return user selected discards and updated hand"""
     visual.clear_screen()
     visual.print_title_bar()
 
-    print("\nSelect two cards to discard.\n")
+    print("\nSelect two cards to discard.")
+    print("{0} the crib.\n".format('You have' if dealer else 'Your opponent has'))
 
     visual.print_hand(hand)
 
@@ -89,7 +90,7 @@ def discard(hand):
 
 def get_crib(dealer, hand, addr):
     """Return crib after performing discard and exchanging card info with peer"""
-    slf_crib_cards, hand = discard(hand)
+    slf_crib_cards, hand = discard(hand, dealer)
     slf_crib_cards_string = "{0} {1}".format(slf_crib_cards[0], slf_crib_cards[1])
 
     opp_crib_cards_string = peer.exchange(addr, slf_crib_cards_string)
