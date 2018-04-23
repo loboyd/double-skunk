@@ -23,8 +23,35 @@ def exit_client():
     print("\nSee you next time!\n")
     exit()
 
+def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
+    """Facilitates pegging phase for one round of the dealing cycle"""
+    table = []       # store played cards
+    owner_mask = []  # store card ownership information
+    to_play = 0 if dealer else 1
+    n_opp_cards = 4
+
+    done_pegging = 0
+    while not done_pegging:
+        visual.clear_screen()
+        visual.print_title_bar()
+
+        opp_crib = 0 if dealer else 1
+        visual.print_hand([-1]*n_opp_cards, index=0, crib=opp_crib)
+
+        visual.print_table(table, owner_mask, starter_card)
+
+        if to_play:
+            print("PLEASE PLAY A CARD")
+        else:
+            print("WAITING FOR OPPONENT...")
+
+        visual.print_hand(hand, crib=dealer)
+
+        tmp = raw_input()
+
+
 def play_game():
-    """Facilitates gameplay between two peers -- friends or public
+    """Facilitates gameplay between two peers
 
     NOT CURRENTLY A SECURE AND TRUSTLESS IMPLEMENTATION
     """
@@ -54,7 +81,7 @@ def play_game():
         crib, slf_hand = func.get_crib(dealer, slf_hand, opp_addr)
 
         # pegging phase
-        slf_score, opp_score = pegging_play(dealer, slf_score, opp_score, opp_addr)
+        slf_score, opp_score = pegging_play(slf_hand, starter_card, slf_score, opp_score, opp_addr, dealer)
         if check_game_over(slf_score, opp_score):
             break
 
