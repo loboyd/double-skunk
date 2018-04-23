@@ -65,6 +65,7 @@ def card_suite_string(card):
 def select_cards(hand):
     """Get user input and remove selected cards from hand (prompt must be handled outside)"""
     usr = raw_input()
+    print("card selected")
     usr = [int(s) - 1 for s in usr.split(' ')]  # -1 because hand is 1-indexed
     selection = [hand[i] for i in usr]
 

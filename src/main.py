@@ -49,10 +49,9 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
 
         # get played card
         if to_play:
-            usr = raw_input()
             play_card, hand = func.select_cards(hand)
             play_card = play_card[0]
-            peer.send(str(play_card), addr)
+            peer.send(addr, str(play_card))
         else:
             play_card = int(peer.recv(addr))
             n_opp_cards -= 1
