@@ -28,8 +28,8 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
     table = []       # store played cards
     owner_mask = []  # store card ownership information
     n_opp_cards = 4
-    opp_crib = 0 if dealer else 1  # dealer's opponent always has crib
-    to_play  = 0 if dealer else 1  # and is also first to play
+    opp_crib = False if dealer else True  # dealer's opponent always has crib
+    to_play  = False if dealer else True  # and is also first to play
 
     done_pegging = 0
     while not done_pegging:
@@ -62,6 +62,9 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
         owner_mask.append(to_play)
 
         # update score
+
+        # pass play between players
+        to_play = not to_play
 
 def play_game():
     """Facilitates gameplay between two peers
