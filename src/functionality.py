@@ -125,6 +125,46 @@ def score_hand(hand, starter):
     #         flush_score[count_flush(hand, starter)] + \
     #         nobs_score*count_nobs(hand, starter)
 
+def score_play(table):
+    """Given a table of played cards, return points earned by the most recently played card"""
+    n = len(table)
+    points = 0
+
+    # count pairs/triples/quadruples
+    i = -2
+    while abs(i) < n+1 and card_rank(table[i]) == card_rank(table[-1]):
+        points += 2*(abs(i)-1)  # twice the number of cards similar to the last played card
+        i -= 1
+
+    # check fifteen
+    if sum([card_rank(c) for c in table]) == 15:
+        points += 2
+
+    # check thirty-one
+    if sum([card_rank(c) for c in table]) == 31:
+        points += 2
+
+    # check run(s)
+    # -2 because must runs must have 3 cards
+    for i in xrange(-n,-2):
+        tmp = table[i:]
+        if is_run(tmp):
+            points += len(tmp)
+
+    return points
+
+def is_run(cards):
+    n = len(cards)
+    if n < 3:
+        return False
+
+    ranks = sorted([card_rank(c) for c in cards])
+
+    if ranks == range(min(ranks), max(ranks)+1):
+        return True
+    else:
+        return False
+
 def count_fifteens(hand, starter, total=15):
     """Return number of unique fifteen-pairs of a hand paired with a starter card
     WRITE UNIT TEST FOR THIS"""
