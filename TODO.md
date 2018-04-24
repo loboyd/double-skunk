@@ -41,7 +41,7 @@ Ideally, this document will contain "everything" that should be completed. I put
   - [x] Finish pairs()
   - [x] Finish fifteens
   - [ ] Finish count_run()
-  - [ ] Write count_flush()
+  - [x] Write count_flush()
   - [ ] Write unit tests for all functions called from score_hand()
 - [x] implement deal()
 - [ ] implement get_crib()

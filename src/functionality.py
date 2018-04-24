@@ -99,32 +99,6 @@ def get_crib(dealer, hand, addr):
     crib = sorted(slf_crib_cards + opp_crib_cards)
     return crib, hand
 
-def score_hand(hand, starter):
-    """Returns the total score of a starter card paired with a hand
-    NOT COMPLETED
-    things to count:
-        - fifteen(s) - done
-        - run(s)
-        - pair(s)    - done
-        - flush
-        - nobs       - done
-    """
-    # # point values for each score "structure"
-    # fifteen_point_val = 2
-    # run_point_val     = {0:0, 3:3, 4:4, 5:5}  # length-of-run:score pairs
-    # pair_point_val    = 2
-    # flush_point_val   = {0:0, 4:4, 5:5}       # length-of-flush:score pairs
-    # nobs_point_val    = 2
-    #
-    # fifteen_score = fifteen_point_val * count_fifteens(hand, starter)
-    # run_score = 0  # 0 is a place holder
-    #
-    # return fifteen_score*count_fifteens(hand, starter) + \
-    #         run_score[count_run(hand, starter)] + \
-    #         count_pairs*count_pairs(hand, starter) + \
-    #         flush_score[count_flush(hand, starter)] + \
-    #         nobs_score*count_nobs(hand, starter)
-
 def score_play(table):
     """Given a table of played cards, return points earned by the most recently played card"""
     n = len(table)
@@ -164,6 +138,32 @@ def is_run(cards):
         return True
     else:
         return False
+
+def score_hand(hand, starter, crib=False):
+    """Returns the total score of a starter card paired with a hand
+    NOT COMPLETED
+    things to count:
+        - fifteen(s) - done
+        - run(s)
+        - pair(s)    - done
+        - flush      - done
+        - nobs       - done
+    """
+    # # point values for each score "structure"
+    # fifteen_point_val = 2
+    # run_point_val     = {0:0, 3:3, 4:4, 5:5}  # length-of-run:score pairs
+    # pair_point_val    = 2
+    # flush_point_val   = {0:0, 4:4, 5:5}       # length-of-flush:score pairs
+    # nobs_point_val    = 2
+    #
+    # fifteen_score = fifteen_point_val * count_fifteens(hand, starter)
+    # run_score = 0  # 0 is a place holder
+    #
+    # return fifteen_score*count_fifteens(hand, starter) + \
+    #         run_score[count_run(hand, starter)] + \
+    #         count_pairs*count_pairs(hand, starter) + \
+    #         flush_score[count_flush(hand, starter)] + \
+    #         nobs_score*count_nobs(hand, starter)
 
 def count_fifteens(hand, starter, total=15):
     """Return number of unique fifteen-pairs of a hand paired with a starter card
@@ -208,8 +208,22 @@ def count_pairs(hand, starter):
                 score += 1
     return score
 
-def count_flush(hand, starter,crib=False):
+def count_flush(hand, starter, crib=False):
     """Return the length of the largest flush (greater than 3) of a hand paired with a starter card"""
+    n = len(hand)
+    if n < 4:
+        return 0
+
+    suites = [card_suite(c) for c in hand]
+    starter_suite = card_suite(starter)
+    combined_suites = suites + [starter_suite]
+
+    # set is used to check all suites are the same
+    if len(set(combined_suites)) == 1:
+        return 5
+
+    elif not crib and len(set(suites)) == 1:
+        return 4
     return 0
 
 def count_nobs(hand, starter):
