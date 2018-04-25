@@ -71,8 +71,8 @@ def print_hand(cards, crib=0, index=1):
     print('\n')
 
 def print_table(cards, mask, starter):
-    """Print the cards which have been played in pegging; use the mask to determine
-    the ownership of the cards"""
+    """Print the cards which have been played in pegging; use the mask
+    to determine the ownership of the cards"""
     n = len(cards)
 
     # set up line strings

@@ -96,7 +96,8 @@ def play_game():
         crib, slf_hand = func.get_crib(dealer, slf_hand, opp_addr)
 
         # pegging phase
-        slf_score, opp_score = pegging_play(slf_hand, starter_card, slf_score, opp_score, opp_addr, dealer)
+        slf_score, opp_score = pegging_play(slf_hand, starter_card,
+            slf_score, opp_score, opp_addr, dealer)
         if check_game_over(slf_score, opp_score):
             break
 

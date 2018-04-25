@@ -7,8 +7,8 @@ suites = ['S', 'D', 'C', 'H']
 ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'X', 'J', 'Q', 'K']
 
 def deal(dealer, opp_addr):
-    """Get random sample of 13 cards; the first six cards are the dealer's hand,
-    the next six are the other player's hand, last is starter card"""
+    """Get random sample of 13 cards; the first six cards are the dealer's
+    hand, the next six are the other player's hand, last is starter card"""
     # establish seed
     if dealer:
         seed = str(random.random())
@@ -48,22 +48,26 @@ def card_value(card):
     if card_rank(card) == 10 or card_rank(card) == 11 or card_rank(card) == 12:
         return 10
     else:
-        return card_rank(card) + 1  # +1 because ranks are 1 larger than their indices
+        # +1 because ranks are 1 larger than their indices
+        return card_rank(card) + 1
 
 def card_rank_string(card):
-    """Return a string describing the rank of a card or underscore for face-down"""
+    """Return a string describing the rank of a card or underscore for
+    face-down"""
     if card == -1:
         return '_'
     return ranks[card_rank(card)]
 
 def card_suite_string(card):
-    """Return a string describing the suite of a card or blank space for face-down"""
+    """Return a string describing the suite of a card or blank space
+    for face-down"""
     if card == -1:
         return ' '
     return suites[card_suite(card)]
 
 def select_cards(hand):
-    """Get user input and remove selected cards from hand (prompt must be handled outside)"""
+    """Get user input and remove selected cards from hand (prompt
+    must be handled outside)"""
     usr = raw_input()
     usr = [int(s) - 1 for s in usr.split(' ')]  # -1 because hand is 1-indexed
     selection = [hand[i] for i in usr]
@@ -89,7 +93,8 @@ def discard(hand, dealer):
 
 
 def get_crib(dealer, hand, addr):
-    """Return crib after performing discard and exchanging card info with peer"""
+    """Return crib after performing discard and exchanging card info
+    with peer"""
     slf_crib_cards, hand = discard(hand, dealer)
     slf_crib_cards_string = "{0} {1}".format(slf_crib_cards[0], slf_crib_cards[1])
 
@@ -100,14 +105,16 @@ def get_crib(dealer, hand, addr):
     return crib, hand
 
 def score_play(table):
-    """Given a table of played cards, return points earned by the most recently played card"""
+    """Given a table of played cards, return points earned by the most
+    recently played card"""
     n = len(table)
     points = 0
 
     # count pairs/triples/quadruples
     i = -2
     while abs(i) < n+1 and card_rank(table[i]) == card_rank(table[-1]):
-        points += 2*(abs(i)-1)  # twice the number of cards similar to the last played card
+        # twice the number of cards similar to the last played card
+        points += 2*(abs(i)-1)
         i -= 1
 
     # check fifteen
@@ -166,7 +173,8 @@ def score_hand(hand, starter, crib=False):
     #         nobs_score*count_nobs(hand, starter)
 
 def count_fifteens(hand, starter, total=15):
-    """Return number of unique fifteen-pairs of a hand paired with a starter card
+    """Return number of unique fifteen-pairs of a hand paired with a
+    starter card
     WRITE UNIT TEST FOR THIS"""
     # include the starter card in the hand if recursion depth is 0
     if starter != -1:
@@ -180,12 +188,15 @@ def count_fifteens(hand, starter, total=15):
         else:
             return 0
 
-    # recursively call fifteens() on the cases with and without using the first card
+    # recursively call fifteens() on the cases with and without using
+    # the first card
     else:
-        return count_fifteens(hand[1:], -1, total-hand[0]) + count_fifteens(hand[1:], -1, total)
+        return count_fifteens(hand[1:], -1, total-hand[0])
+             + count_fifteens(hand[1:], -1, total)
 
 def count_run(hand, starter):
-    """Return the length of the largest run of a hand paired with a starter card
+    """Return the length of the largest run of a hand paired
+    with a starter card
     NOT COMPLETE"""
     # add the starter to the hand
     hand += [starter]
@@ -209,7 +220,8 @@ def count_pairs(hand, starter):
     return score
 
 def count_flush(hand, starter, crib=False):
-    """Return the length of the largest flush (greater than 3) of a hand paired with a starter card"""
+    """Return the length of the largest flush (greater than 3) of
+    a hand paired with a starter card"""
     n = len(hand)
     if n < 4:
         return 0
@@ -227,7 +239,8 @@ def count_flush(hand, starter, crib=False):
     return 0
 
 def count_nobs(hand, starter):
-    """Return 1 if a hand paired with a starter card contains nobs, 0 otherwise
+    """Return 1 if a hand paired with a starter card contains
+    nobs, 0 otherwise
     WRITE UNIT TEST FOR THIS"""
     for card in hand:
         if ranks[card_rank(card)] == 'J' and card_suite(card) == card(suite):

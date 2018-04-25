@@ -84,10 +84,10 @@ def exchange(addr, send_data):
             sent = 1
 
     return recv_data
-
+888888888888888888888888888888888888888888888888888888888888888888888888
 def get_peer_ip():
     """Get IP address of a friend. (DO SOME SANITY CHECKING HERE.)
-    Eventually, nodes should publish their IP's to a server along with unique keys so that
-    peer nodes can just query the server. For true peer-to-peer, some type of routing would
-    need to be implemented."""
+    Eventually, nodes should publish their IP's to a server along with
+    unique keys so that peer nodes can just query the server. For true
+    peer-to-peer, some type of routing would need to be implemented."""
     return raw_input("Please input your friend's public IP address:\n")
