@@ -146,29 +146,19 @@ def score_hand(hand, starter, crib=False):
     """Returns the total score of a starter card paired with a hand
     NOT COMPLETED
     things to count:
-        - fifteen(s) - done
-        - run(s)
+        - fifteen(s) - broken
+        - run(s)     - done
         - pair(s)    - done
         - flush      - done
         - nobs       - done
     """
-    # # point values for each score "structure"
-    # fifteen_point_val = 2
-    # run_point_val     = {0:0, 3:3, 4:4, 5:5}  # length-of-run:score pairs
-    # pair_point_val    = 2
-    # flush_point_val   = {0:0, 4:4, 5:5}       # length-of-flush:score pairs
-    # nobs_point_val    = 2
-    #
-    # fifteen_score = fifteen_point_val * count_fifteens(hand, starter)
-    # run_score = 0  # 0 is a place holder
-    #
-    # return fifteen_score*count_fifteens(hand, starter) + \
-    #         run_score[count_run(hand, starter)] + \
-    #         count_pairs*count_pairs(hand, starter) + \
-    #         flush_score[count_flush(hand, starter)] + \
-    #         nobs_score*count_nobs(hand, starter)
+    return score_fifteens(hand, starter)    \
+         + score_runs(hand, starter)        \
+         + score_pairs(hand, starter)       \
+         + score_flush(hand, starter, crib) \
+         + score_nobs(hand, starter) 
 
-def count_fifteens(hand, starter, total=15):
+def score_fifteens(hand, starter, total=15):
     """Return number of unique fifteen-pairs of a hand paired with a
     starter card
     WRITE UNIT TEST FOR THIS"""
@@ -190,10 +180,9 @@ def count_fifteens(hand, starter, total=15):
         return count_fifteens(hand[1:], -1, total-hand[0]) \
              + count_fifteens(hand[1:], -1, total)
 
-def count_runs(hand, starter=None):
-    """Return the length of the largest run of a hand paired
-    with a starter card
-    NOT COMPLETE"""
+def score_runs(hand, starter=None):
+    """Return the number of points earned by the runs of a hand
+    paired with a starter card"""
     # add the starter to the hand
     if starter:
         hand.append(starter)
@@ -227,24 +216,25 @@ def count_runs(hand, starter=None):
 
     return points
 
-def count_pairs(hand, starter):
-    """Return number of pairs of a hand paired with a starter card
+def score_pairs(hand, starter):
+    """Return number of points earned by pairs in a hand paired
+    with a starter card
     WRITE UNIT TEST FOR THIS"""
     # add the starter to the hand
     hand += [starter]
 
-    score = 0
+    points = 0
 
     n = len(hand)
     for i in xrange(n-1):
-        for j in xrange(i+1,n):
+        for j in xrange(i+1, n):
             if hand[i] == hand[j]:
-                score += 1
-    return score
+                points += 2
+    return points
 
-def count_flush(hand, starter, crib=False):
-    """Return the length of the largest flush (greater than 3) of
-    a hand paired with a starter card"""
+def score_flush(hand, starter, crib=False):
+    """Return number of points earned by a flush of a hand paired
+    with a starter card"""
     n = len(hand)
     if n < 4:
         return 0
@@ -261,12 +251,13 @@ def count_flush(hand, starter, crib=False):
         return 4
     return 0
 
-def count_nobs(hand, starter):
-    """Return 1 if a hand paired with a starter card contains
-    nobs, 0 otherwise
+def score_nobs(hand, starter):
+    """Return number of points earned by nobs in hand paired with a
+    starter card
     WRITE UNIT TEST FOR THIS"""
+    starter_suite = card_suite(starter)
     for card in hand:
-        if ranks[card_rank(card)] == 'J' and card_suite(card) == card(suite):
+        if card_rank_string(card) == 'J' and card_suite(card) == starter_suite:
             return 1
     return 0
 
