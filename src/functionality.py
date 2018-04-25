@@ -135,16 +135,12 @@ def score_play(table):
     return points
 
 def is_run(cards):
+    """Determine whether or not three cards constitute a run"""
     n = len(cards)
-    if n < 3:
-        return False
-
-    ranks = sorted([card_rank(c) for c in cards])
-
-    if ranks == range(min(ranks), max(ranks)+1):
-        return True
-    else:
-        return False
+    if 3 <= n <= 5:
+        ranks = sorted([card_rank(c) for c in cards])
+        return ranks == range(min(ranks),max(ranks)+1)
+    return False
 
 def score_hand(hand, starter, crib=False):
     """Returns the total score of a starter card paired with a hand
@@ -191,18 +187,45 @@ def count_fifteens(hand, starter, total=15):
     # recursively call fifteens() on the cases with and without using
     # the first card
     else:
-        return count_fifteens(hand[1:], -1, total-hand[0])
+        return count_fifteens(hand[1:], -1, total-hand[0]) \
              + count_fifteens(hand[1:], -1, total)
 
-def count_run(hand, starter):
+def count_runs(hand, starter=None):
     """Return the length of the largest run of a hand paired
     with a starter card
     NOT COMPLETE"""
     # add the starter to the hand
-    hand += [starter]
+    if starter:
+        hand.append(starter)
     hand = sorted(hand)
+    n = len(hand)
+    points = 0
 
-    return 0
+    # check for five card run
+    if is_run(hand):
+        # smaller runs are not possible if a 5-run exists
+        return 5
+
+    # loop over all possible quadruples
+    for i in xrange(n):
+        tmp = hand[:i] + hand[i+1:]
+        if is_run(tmp):
+            points += 4
+
+    # 3-runs are not possible if a 4-run exists
+    if points:
+        return points
+
+    # loop over all possible triples and check for run-ship
+    for i in xrange(n-2):
+        for j in xrange(i+1, n-1):
+            for k in xrange(j+1, n):
+                # there is probably a nicer way to do this...
+                tmp = [hand[i], hand[j], hand[k]]
+                if is_run(tmp):
+                    points += 3
+
+    return points
 
 def count_pairs(hand, starter):
     """Return number of pairs of a hand paired with a starter card
