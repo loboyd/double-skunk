@@ -156,29 +156,76 @@ def score_hand(hand, starter, crib=False):
          + score_runs(hand, starter)        \
          + score_pairs(hand, starter)       \
          + score_flush(hand, starter, crib) \
-         + score_nobs(hand, starter) 
+         + score_nobs(hand, starter)
 
-def score_fifteens(hand, starter, total=15):
-    """Return number of unique fifteen-pairs of a hand paired with a
-    starter card
-    WRITE UNIT TEST FOR THIS"""
-    # include the starter card in the hand if recursion depth is 0
-    if starter != -1:
-        hand = [starter] + hand
-        hand = map(card_value, hand)
+def score_fifteens(hand, starter):
+    """Return the number of points earned by the fifteens in a
+    hand paired with a starter card
 
-    # base case
-    if len(hand) == 1:
-        if total == hand[0]:
-            return 1
-        else:
-            return 0
+    NOTE: This structure of this function copied directly from
+    score_runs() below, so there is probably a better way to do
+    either or both of the functions."""
+    # add the starter to the hand
+    hand.append(starter)
+    hand = sorted(hand)
+    hand = map(card_value, hand)
+    n = len(hand)
+    points = 0
 
-    # recursively call fifteens() on the cases with and without using
-    # the first card
-    else:
-        return count_fifteens(hand[1:], -1, total-hand[0]) \
-             + count_fifteens(hand[1:], -1, total)
+    # check for five card fifteen
+    if sum(hand) == 15:
+        # smaller fifteens are not possible if a 5-card fifteen exists
+        print('5 card')
+        return 2
+
+    # loop over all possible quadruples
+    for i in xrange(n):
+        tmp = hand[:i] + hand[i+1:]
+        if sum(tmp) == 15:
+            points += 2
+            print('4 card')
+
+    # loop over all possible triples and check for fifteen-ship
+    for i in xrange(n-2):
+        for j in xrange(i+1, n-1):
+            for k in xrange(j+1, n):
+                # there is probably a nicer way to do this...
+                tmp = [hand[i], hand[j], hand[k]]
+                if sum(tmp) == 15:
+                    points += 2
+                    print('3 card')
+
+    # loop over all possible tuples and check for fifteen-ship
+    for i in xrange(n-1):
+        for j in xrange(i+1,n):
+            tmp = [hand[i], hand[j]]
+            if sum(tmp) == 15:
+                points += 2
+                print('2 card')
+
+    return points
+
+#def score_fifteens(hand, starter, total=15):
+#    """Return number of unique fifteen-pairs of a hand paired with a
+#    starter card
+#    WRITE UNIT TEST FOR THIS"""
+#    # include the starter card in the hand if recursion depth is 0
+#    if starter != -1:
+#        hand = [starter] + hand
+#        hand = map(card_value, hand)
+#
+#    # base case
+#    if len(hand) == 1:
+#        if total == hand[0]:
+#            return 1
+#        else:
+#            return 0
+#
+#    # recursively call fifteens() on the cases with and without using
+#    # the first card
+#    else:
+#        return score_fifteens(hand[1:], -1, total-hand[0]) \
+#             + score_fifteens(hand[1:], -1, total)
 
 def score_runs(hand, starter=None):
     """Return the number of points earned by the runs of a hand
