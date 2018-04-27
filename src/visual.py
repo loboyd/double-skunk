@@ -26,6 +26,11 @@ def first_dealer_message(dealer):
     usr = raw_input("\n\nPress ENTER to continue to the game.")
     print("\nWAITING FOR OPPONENT...")
 
+def go_message():
+    """Alert player they must say ``GO``"""
+    print("No playable cards. You must say \"GO\".")
+    raw_input("Please press ENTER")
+
 def print_hand(cards, crib=0, index=1):
     """Print hand up to six cards with rank, suite, and hand index in
     the following format:
