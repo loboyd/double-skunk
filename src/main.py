@@ -28,8 +28,8 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
     table = []       # store played cards
     owner_mask = []  # store card ownership information
     n_opp_cards = 4
-    opp_crib = False if dealer else True  # dealer's opponent always has crib
-    to_play  = False if dealer else True  # and is also first to play
+    opp_crib = not dealer  # dealer's opponent always has crib
+    to_play  = not dealer  # and is also first to play
 
     done_pegging = 0
     while not done_pegging:
@@ -75,7 +75,7 @@ def play_game():
     opp_score = 0
 
     # get peer address
-    host = peer.get_peer_ip()  # dummy function; not yet implemented
+    host = peer.get_peer_ip()
     port = 55693
     opp_addr = (host, port)
 
