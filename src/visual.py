@@ -82,15 +82,16 @@ def print_table(cards, mask, starter):
     bot_line = ''
 
     if n > 0:
+        # pair card with ownership
         cards = zip(cards, mask)
 
         # build line strings with position based on ownership
-        for c in cards:
+        for card, owner in cards:
             # build card pieces
-            card_top = "| {0} |".format(func.card_rank_string(c[0]))
-            card_bot = "| {0} |".format(func.card_suite_string(c[0]))
+            card_top = "| {0} |".format(func.card_rank_string(card))
+            card_bot = "| {0} |".format(func.card_suite_string(card))
 
-            if c[1]:
+            if owner:
                 top_line += "     "
                 mid_line += card_top
                 bot_line += card_bot
