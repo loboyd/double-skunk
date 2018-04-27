@@ -54,6 +54,7 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
             min_card = min(map(func.card_value, hand))
             if table_points + min_card > 31:
                 visual.go_message();
+                go = 1
                 play_card = '-1'  # go card
             else:
                 play_card, hand = func.select_cards(hand)
@@ -71,8 +72,8 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
             table.append(play_card)
             owner_mask.append(to_play)
 
-        # update score
-        play_score = func.score_play(table)
+            # update score
+            play_score = func.score_play(table)
         if to_play:
             slf_score += play_score
             if slf_score >= 121:
