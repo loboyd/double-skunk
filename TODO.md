@@ -37,18 +37,17 @@ Ideally, this document will contain "everything" that should be completed. I put
 ## functionality.py
 - [x] Come up with a nice way of sorting the hands (It would be really nice if the numbers representing the cards happened to share the preferred ordering of the cards -- this way, the native sorted() could be used. -- EDIT -- I think this is working now, but it should probably be double-checked
 - [ ] Write a function to count points (count hands)
-  - [ ] Finish design for the score_hand() function
+  - [x] Finish design for the score_hand() function
   - [x] Finish pairs()
   - [x] Finish fifteens
-  - [ ] Finish count_run()
+  - [x] Finish count_run()  (EDIT: score_runs())
   - [x] Write count_flush()
   - [ ] Write unit tests for all functions called from score_hand()
 - [x] implement deal()
 - [ ] implement get_crib()
-## player.py
-- [ ] Redesign player.py to be used for peer-to-peer
-- [ ] Write peg() method
 ## peer.py
 - [ ] implement sanity checking for user input IP address in get_peer_ip()
-- [ ] implement send()
-- [ ] implement recv()
+- [x] implement send()
+- [x] implement recv()
+## visual.py
+- [ ] implement go_message()
