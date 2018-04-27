@@ -48,6 +48,7 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
         visual.print_hand(hand, crib=dealer)
 
         # get played card or go message
+        go = False
         if to_play:
             if sum(table) + min(hand) > 31:
                 visual.go_message();
