@@ -20,17 +20,18 @@ Ideally, this document will contain "everything" that should be completed. I put
 - [x] Write print_commands() for user commands
 - [ ] Maintain user command list order
 - [x] Write main client loop
-- [ ] Write display for first dealer
+- [x] Write display for first dealer
 - [ ] Write code for all user commands
   - [ ] add: add a new friend (name, IP address)
   - [ ] friends: see friend list (probably pickled dictionary)
   - [ ] name: edit your username (probably also pickled)
-  - [ ] new: enter new game
+  - [x] new: enter new game
     - [x] outline main game loop
     - [x] implment get_crib() function
-    - [ ] implement discard() function
-    - [ ] implement reveal_starter_card()
-    - [ ] implement pegging_play()
+    - [x] implement discard() function
+    - [x] implement reveal_starter_card() (EDIT: redesigned so this is not necessary)
+    - [x] implement pegging_play()
+     -[ ] write code to count `last card for 1` point
     - [ ] implement check game over()
   - [x] help: see this list of commands
   - [x] quit: quit game
