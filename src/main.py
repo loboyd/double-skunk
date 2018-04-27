@@ -47,23 +47,42 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
 
         visual.print_hand(hand, crib=dealer)
 
-        # get played card
+        # get played card or go message
         if to_play:
-            play_card, hand = func.select_cards(hand)
-            play_card = play_card[0]
+            if sum(table) + min(hand) > 31:
+                visual.go_message();
+                play_card = '-1'  # go card
+            else:
+                play_card, hand = func.select_cards(hand)
+                play_card = play_card[0]
             peer.send(addr, str(play_card))
         else:
             play_card = int(peer.recv(addr))
-            n_opp_cards -= 1
+            if play_card == '-1':
+                go = 1
+            else:
+                n_opp_cards -= 1
 
         # update table
-        table.append(play_card)
-        owner_mask.append(to_play)
+        if not go:
+            table.append(play_card)
+            owner_mask.append(to_play)
 
         # update score
+        play_score = func.score_play(table)
+        if to_play:
+            slf_score += play_score
+            if slf_score >= 121:
+                done_pegging = 1
+        else:
+            opp_score += play_score
+            if opp_score >= 121:
+                done_pegging = 1
 
         # pass play between players
         to_play = not to_play
+
+    return slf_score, opp_score
 
 def play_game():
     """Facilitates gameplay between two peers
