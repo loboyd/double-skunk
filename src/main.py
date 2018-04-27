@@ -50,7 +50,9 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
         # get played card or go message
         go = False
         if to_play:
-            if sum(table) + min(hand) > 31:
+            table_points = sum(map(func.card_value, table))
+            min_card = min(map(func.card_value, hand))
+            if table_points + min_card > 31:
                 visual.go_message();
                 play_card = '-1'  # go card
             else:
