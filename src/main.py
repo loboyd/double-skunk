@@ -30,6 +30,8 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
     n_opp_cards = 4
     opp_crib = not dealer  # dealer's opponent always has crib
     to_play  = not dealer  # and is also first to play
+    play_score = 0
+    opp_go = False
 
     done_pegging = 0
     while not done_pegging:
@@ -48,27 +50,30 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
         visual.print_hand(hand, crib=dealer)
 
         # get played card or go message
-        go = False
+        slf_go = False
         if to_play:
             table_points = sum(map(func.card_value, table))
             min_card = min(map(func.card_value, hand))
-            if table_points + min_card > 31:
-                visual.go_message();
-                go = 1
-                play_card = '-1'  # go card
+            if table_points + min_card > 31 or len(hand) < 1:
+                if opp_go:
+                    done_pegging = True
+                else:
+                    visual.go_message();
+                    slf_go = 1
+                play_card = '-1'  # "go card"
             else:
                 play_card, hand = func.select_cards(hand)
                 play_card = play_card[0]
             peer.send(addr, str(play_card))
         else:
             play_card = int(peer.recv(addr))
-            if play_card == '-1':
-                go = 1
+            if play_card == -1:
+                opp_go = True
             else:
                 n_opp_cards -= 1
 
         # update table
-        if not go:
+        if not opp_go and not slf_go:
             table.append(play_card)
             owner_mask.append(to_play)
 
@@ -77,11 +82,11 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
         if to_play:
             slf_score += play_score
             if slf_score >= 121:
-                done_pegging = 1
+                done_pegging = True
         else:
             opp_score += play_score
             if opp_score >= 121:
-                done_pegging = 1
+                done_pegging = True
 
         # pass play between players
         to_play = not to_play
@@ -128,6 +133,18 @@ def play_game():
         slf_score, opp_score = func.count_hands(dealer, slf_hand, opp_hand, crib)
         if check_game_over(slf_score, opp_score):
             break
+
+def check_game_over(slf_score, opp_score):
+    """Determine whether or not the game has ended; Display
+    winner/loser message depending"""
+    if slf_score >= 121:
+        visual.game_end_message(winner=True)
+        return True
+    elif opp_score >= 121:
+        visual.game_end_message(winner=False)
+        return True
+    else:
+        return False
 
 def add_friend():
     """Saves a new friend to the friend list"""

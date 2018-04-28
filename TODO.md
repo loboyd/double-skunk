@@ -35,6 +35,7 @@ Ideally, this document will contain "everything" that should be completed. I put
     - [ ] implement check game over()
   - [x] help: see this list of commands
   - [x] quit: quit game
+  - [ ] display running point total during pegging phase
 ## functionality.py
 - [x] Come up with a nice way of sorting the hands (It would be really nice if the numbers representing the cards happened to share the preferred ordering of the cards -- this way, the native sorted() could be used. -- EDIT -- I think this is working now, but it should probably be double-checked
 - [ ] Write a function to count points (count hands)
@@ -52,3 +53,4 @@ Ideally, this document will contain "everything" that should be completed. I put
 - [x] implement recv()
 ## visual.py
 - [ ] implement go_message()
+- [ ] write game_end_message(winner) function
