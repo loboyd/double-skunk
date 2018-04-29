@@ -104,6 +104,13 @@ def get_crib(dealer, hand, addr):
     crib = sorted(slf_crib_cards + opp_crib_cards)
     return crib, hand
 
+def valid_play_exists(hand, table_value_sum):
+    """Determine whether or not a valid play exists given a
+    hand paired with the sum of the values of the table"""
+    if hand:
+        return min(map(card_value, hand)) + table_value_sum <= 31
+    return False
+
 def score_play(table):
     """Given a table of played cards, return points earned by the most
     recently played card"""
