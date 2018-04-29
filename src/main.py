@@ -27,17 +27,20 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
     """Facilitates pegging phase for one round of the dealing cycle"""
     table = []       # store played cards
     owner_mask = []  # store card ownership information
-    n_opp_cards = 4
+    table_value_sum = 0
     opp_crib = not dealer  # dealer's opponent always has crib
     to_play  = not dealer  # and is also first to play
     play_score = 0
+    slf_go = False
     opp_go = False
+    n_played_cards = 0  # no.of cards played for entire hand
+    reset = False
 
-    done_pegging = 0
-    while not done_pegging:
+    while n_played_cards < 8:
         visual.clear_screen()
         visual.print_title_bar()
 
+        n_opp_cards = n_played_cards - len(hand)
         visual.print_hand([-1]*n_opp_cards, index=0, crib=opp_crib)
 
         visual.print_table(table, owner_mask, starter_card)
@@ -50,46 +53,63 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
         visual.print_hand(hand, crib=dealer)
 
         # get played card or go message
-        slf_go = False
         if to_play:
-            table_points = sum(map(func.card_value, table))
-            min_card = min(map(func.card_value, hand))
-            if table_points + min_card > 31 or len(hand) < 1:
-                if opp_go:
-                    done_pegging = True
-                else:
-                    visual.go_message();
-                    slf_go = 1
-                play_card = '-1'  # "go card"
+            if func.valid_play_exists(hand, table_value_sum):
+                # get valid play
+                play_rank_tmp = 32
+                while play_rank_tmp + table_value_sum > 31:
+                    play_card, hand = func.select_cards(hand)
+                    if play_rank_tmp != 32:
+                        print("Please select a lower rank card.\n")
+                    play_card = play_card[0]  # return type is list
+                    play_rank_tmp = func.card_value(play_card)
+                n_played_cards += 1
             else:
-                play_card, hand = func.select_cards(hand)
-                play_card = play_card[0]
+                if hand:
+                    visual.go_message()
+                slf_go = True
+                play_card = -1  # "go card"
+                if opp_go:
+                    last_card = True
+                    reset = True
             peer.send(addr, str(play_card))
+
         else:
             play_card = int(peer.recv(addr))
             if play_card == -1:
                 opp_go = True
+                if slf_go:
+                    last_card = False
+                    reset = True
             else:
                 n_opp_cards -= 1
+                n_played_cards += 1
 
-        # update table
-        if not opp_go and not slf_go:
+        # update table and scores
+        if play_card != -1:
+            # add play card to table
             table.append(play_card)
             owner_mask.append(to_play)
+            table_value_sum += func.card_value(play_card)
 
             # update score
             play_score = func.score_play(table)
-        if to_play:
-            slf_score += play_score
-            if slf_score >= 121:
-                done_pegging = True
-        else:
-            opp_score += play_score
-            if opp_score >= 121:
-                done_pegging = True
+            if to_play:
+                slf_score += play_score
+                if slf_score >= 121:
+                    n_played_cards = 8  # exit loop early
+            else:
+                opp_score += play_score
+                if opp_score >= 121:
+                    n_played_cards = 8  # exit loop early
+        elif reset:
+            table = []
+            slf_go = False
+            opp_go = False
 
         # pass play between players
-        to_play = not to_play
+        if opp_go and not slf_go:
+            to_play = not to_play
 
     return slf_score, opp_score
 
