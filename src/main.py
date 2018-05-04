@@ -113,8 +113,8 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
             opp_score += int(not last_card)
 
         # pass play between players
-        if opp_go and not slf_go:
-            to_play = not to_play
+        # if opp_go and not slf_go:
+        to_play = not to_play
 
     return slf_score, opp_score
 
