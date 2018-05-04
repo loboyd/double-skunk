@@ -28,20 +28,20 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
     table = []       # store played cards
     owner_mask = []  # store card ownership information
     table_value_sum = 0
-    opp_crib = not dealer  # dealer's opponent always has crib
-    to_play  = not dealer  # and is also first to play
+    to_play  = not dealer  # dealer's opponent is first to play
     play_score = 0
     slf_go = False
     opp_go = False
-    n_played_cards = 0  # no.of cards played for entire hand
+    n_played_cards = 0  # no. of cards played for entire hand
     reset = False
 
     while n_played_cards < 8:
         visual.clear_screen()
         visual.print_title_bar()
 
-        n_opp_cards = n_played_cards - len(hand)
-        visual.print_hand([-1]*n_opp_cards, index=0, crib=opp_crib)
+        # print opponent hand (face down)
+        n_opp_cards = 8 - n_played_cards - len(hand)
+        visual.print_hand([-1]*n_opp_cards, index=0, crib=not dealer)
 
         visual.print_table(table, owner_mask, starter_card)
 
@@ -56,13 +56,15 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
         if to_play:
             if func.valid_play_exists(hand, table_value_sum):
                 # get valid play
-                play_rank_tmp = 32
-                while play_rank_tmp + table_value_sum > 31:
-                    play_card, hand = func.select_cards(hand)
-                    if play_rank_tmp != 32:
+                play_value_tmp = 32
+                while play_value_tmp + table_value_sum > 31:
+                    print play_value_tmp, table_value_sum
+                    if play_value_tmp != 32:
                         print("Please select a lower rank card.\n")
+                    play_card, hand = func.select_cards(hand)
                     play_card = play_card[0]  # return type is list
-                    play_rank_tmp = func.card_value(play_card)
+                    play_value_tmp = func.card_value(play_card)
+                    print "pvt: ", str(play_value_tmp)
                 n_played_cards += 1
             else:
                 if hand:
@@ -104,8 +106,11 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
                     n_played_cards = 8  # exit loop early
         elif reset:
             table = []
+            table_value_sum = 0
             slf_go = False
             opp_go = False
+            slf_score += int(last_card)
+            opp_score += int(not last_card)
 
         # pass play between players
         if opp_go and not slf_go:
