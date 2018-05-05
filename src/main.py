@@ -38,6 +38,7 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
     while n_played_cards < 8:
         visual.clear_screen()
         visual.print_title_bar()
+        visual.print_score_bar(slf_score, opp_score)
 
         # print opponent hand (face down)
         n_opp_cards = 8 - n_played_cards - len(hand)
@@ -64,7 +65,6 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
                     play_card, hand = func.select_cards(hand)
                     play_card = play_card[0]  # return type is list
                     play_value_tmp = func.card_value(play_card)
-                    print "pvt: ", str(play_value_tmp)
                 n_played_cards += 1
             else:
                 if hand:

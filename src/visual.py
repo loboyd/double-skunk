@@ -18,11 +18,17 @@ def print_title_bar():
     """Prints the double-skunk title bar"""
     print("====DOUBLE-SKUNK=============================")
 
+def print_score_bar(slf_score, opp_score):
+    """Prints the score bar with opponent on the left, self on the right"""
+    print("OPPONENT: |{0:3}|                    YOU: |{1:3}|".format(
+        opp_score, slf_score))
+
 def first_dealer_message(dealer):
     """Display message for informing the player of the first dealer"""
     clear_screen()
     print_title_bar()
-    print("\n{} will be the first dealer.".format("YOU" if dealer else "YOUR OPPONENT"))
+    print("\n{} will be the first dealer.".format(
+        "YOU" if dealer else "YOUR OPPONENT"))
     usr = raw_input("\n\nPress ENTER to continue to the game.")
     print("\nWAITING FOR OPPONENT...")
 
@@ -73,7 +79,6 @@ def print_hand(cards, crib=0, index=1):
     if index:
         print(div_line)
         print(index_line)
-    print('\n')
 
 def print_table(cards, mask, starter):
     """Print the cards which have been played in pegging; use the mask
