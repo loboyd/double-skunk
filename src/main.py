@@ -157,7 +157,7 @@ def play_game():
 
         # count hands and crib
         slf_score, opp_score = visual.display_all_hand_counts(dealer,
-            slf_hand, opp_hand, crib, starter, slf_score, opp_score)
+            slf_hand, opp_hand, crib, starter_card, slf_score, opp_score)
         if check_game_over(slf_score, opp_score):
             break
 
