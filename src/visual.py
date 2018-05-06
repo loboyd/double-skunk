@@ -122,7 +122,7 @@ def print_table(cards, mask, starter):
     print(bot_line)
     print('\n')
 
-def display_all_hand_counts(dealer, slf_hand, opp_hand, crib,
+def display_all_hand_counts(dealer, slf_hand, opp_hand, crib, starter,
     slf_score, opp_score):
     """Display all hands with their total point counts in the
     proper order"""
@@ -142,7 +142,7 @@ def display_all_hand_counts(dealer, slf_hand, opp_hand, crib,
         print_title_bar()
         print_score_bar(slf_score, opp_score)
         print("\n{0}".format(strings[i]))
-        print("SCORE: {0:3}".format(func.score_hand(hands[i])))
+        print("SCORE: {0:3}".format(func.score_hand(hands[i], starter)))
         print_hand(hands[i])
         raw_input("Press ENTER to continue.")
 
