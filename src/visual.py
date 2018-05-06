@@ -121,3 +121,28 @@ def print_table(cards, mask, starter):
     print(mid_line)
     print(bot_line)
     print('\n')
+
+def display_all_hand_counts(dealer, slf_hand, opp_hand, crib,
+    slf_score, opp_score):
+    """Display all hands with their total point counts in the
+    proper order"""
+    # collect hands and description strings and establish order
+    hands = [slf_hand, opp_hand, crib]
+    strings = ["YOUR HAND", "OPPONENT'S HAND"]
+    if dealer:
+        ind = [1, 0, 2]
+        strings.append("YOUR CRIB")
+    else:
+        ind = [0, 1, 2]
+        strings.append("OPPONENT'S CRIB")
+
+    # loop over hands and display
+    for i in ind:
+        clear_screen()
+        print_title_bar()
+        print_score_bar(slf_score, opp_score)
+        print("\n{0}".format(strings[i]))
+        print("SCORE: {0:3}".format(func.score_hand(hands[i])))
+        print_hand(hands[i])
+        raw_input("Press ENTER to continue.")
+

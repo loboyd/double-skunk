@@ -111,6 +111,7 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
             opp_go = False
             slf_score += int(last_card)
             opp_score += int(not last_card)
+            reset = False
 
         # pass play between players
         # if opp_go and not slf_go:
@@ -155,7 +156,8 @@ def play_game():
             break
 
         # count hands and crib
-        slf_score, opp_score = func.count_hands(dealer, slf_hand, opp_hand, crib)
+        slf_score, opp_score = visual.display_all_hand_counts(dealer,
+            slf_hand, opp_hand, crib, slf_score, opp_score)
         if check_game_over(slf_score, opp_score):
             break
 
