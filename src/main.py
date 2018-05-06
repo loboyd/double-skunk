@@ -136,12 +136,12 @@ def play_game():
     # determine first dealer (THIS IS NOT SECURE AND TRUSTLESS)
     slf_draw = random.random()
     opp_draw = peer.exchange(opp_addr, str(slf_draw))
-    dealer = 0 if float(slf_draw) < float(opp_draw) else 1
+    dealer = float(slf_draw) < float(opp_draw)
 
     visual.first_dealer_message(dealer)
 
     # main game loop
-    game_over = 0
+    game_over = False
     while not game_over:
         # deal cards (ALSO NOT SECURE AND TRUSTLESS)
         slf_hand, opp_hand, starter_card = func.deal(dealer, opp_addr)
