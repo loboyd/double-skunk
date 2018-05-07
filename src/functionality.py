@@ -94,10 +94,11 @@ def get_crib(dealer, hand, addr):
     """Return crib after performing discard and exchanging card info
     with peer"""
     slf_crib_cards, hand = discard(hand, dealer)
-    slf_crib_cards_string = "{0} {1}".format(slf_crib_cards[0], slf_crib_cards[1])
+    # slf_crib_cards_string = "{0} {1}".format(slf_crib_cards[0], slf_crib_cards[1])
 
-    opp_crib_cards_string = peer.exchange(addr, slf_crib_cards_string)
-    opp_crib_cards = int(opp_crib_cards_string.split(' '))
+    #opp_crib_cards_string = peer.exchange(addr, slf_crib_cards_string)
+    #opp_crib_cards = int(opp_crib_cards_string.split(' '))
+    opp_crib_cards = peer.exchange(addr, slf_crib_cards)
 
     crib = sorted(slf_crib_cards + opp_crib_cards)
     return crib, hand
