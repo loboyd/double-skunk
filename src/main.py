@@ -155,6 +155,13 @@ def play_game():
         if check_game_over(slf_score, opp_score):
             break
 
+        # get opponent's hand and crib
+        opp_hand = peer.exchange(opp_addr, slf_hand)
+        if dealer:
+            peer.send(addr, crib)
+        else:
+            crib = peer.recv(addr)
+
         # count hands and crib
         slf_score, opp_score = visual.display_all_hand_counts(dealer,
             slf_hand, opp_hand, crib, starter_card, slf_score, opp_score)
