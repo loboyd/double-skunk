@@ -16,7 +16,7 @@ def deal(dealer, opp_addr):
     else:
         seed = peer.recv(opp_addr)
 
-    random.seed(seed)
+    random.seed(float(seed))
 
     temp = random.sample(range(52), 13)
     if dealer:
