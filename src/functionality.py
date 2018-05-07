@@ -124,11 +124,11 @@ def score_play(table):
         i -= 1
 
     # check fifteen
-    if sum([card_rank(c) for c in table]) == 15:
+    if sum([card_value(c) for c in table]) == 15:
         points += 2
 
     # check thirty-one
-    if sum([card_rank(c) for c in table]) == 31:
+    if sum([card_value(c) for c in table]) == 31:
         points += 2
 
     # check run(s)
