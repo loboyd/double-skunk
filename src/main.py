@@ -144,7 +144,7 @@ def play_game():
     game_over = False
     while not game_over:
         # deal cards (ALSO NOT SECURE AND TRUSTLESS)
-        slf_hand, opp_hand, starter_card = func.deal(dealer, opp_addr)
+        slf_hand, starter_card = func.deal(dealer, opp_addr)
 
         # perform discard
         crib, slf_hand = func.get_crib(dealer, slf_hand, opp_addr)

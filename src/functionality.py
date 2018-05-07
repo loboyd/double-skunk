@@ -21,13 +21,11 @@ def deal(dealer, opp_addr):
     temp = random.sample(range(52), 13)
     if dealer:
         slf_hand = temp[:6]
-        opp_hand = temp[6:12]
     else:
         slf_hand = temp[6:12]
-        opp_hand = temp[:6]
     starter = temp[12]
 
-    return sorted(slf_hand), sorted(opp_hand), starter
+    return sorted(slf_hand), starter
 
 def card_suite(card):
     """Return the suite index of a card (integer represented)
@@ -99,7 +97,7 @@ def get_crib(dealer, hand, addr):
     slf_crib_cards_string = "{0} {1}".format(slf_crib_cards[0], slf_crib_cards[1])
 
     opp_crib_cards_string = peer.exchange(addr, slf_crib_cards_string)
-    opp_crib_cards = opp_crib_cards_string.split(' ')
+    opp_crib_cards = int(opp_crib_cards_string.split(' '))
 
     crib = sorted(slf_crib_cards + opp_crib_cards)
     return crib, hand
