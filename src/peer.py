@@ -80,9 +80,13 @@ def exchange(addr, send_data):
             s.settimeout(random.random()/10.)
             s.bind(('0.0.0.0', port))
             s.listen(5)
-            c, _ = s.accept()
-            c.send(send_data)
-            c.close()
+            try:
+                c, _ = s.accept()
+                c.send(send_data)
+                c.close()
+            except:
+                pass
+
             sent = 1
 
     recv_data = convert_from_string(recv_data)
