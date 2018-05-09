@@ -84,10 +84,9 @@ def exchange(addr, send_data):
                 c, _ = s.accept()
                 c.send(send_data)
                 c.close()
+                sent = 1
             except:
                 pass
-
-            sent = 1
 
     recv_data = convert_from_string(recv_data)
     return recv_data
