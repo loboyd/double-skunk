@@ -150,20 +150,20 @@ def play_game():
         crib, slf_hand = func.get_crib(dealer, slf_hand, opp_addr)
 
         # pegging phase
-        slf_score, opp_score = pegging_play(slf_hand, starter_card,
+        slf_score, opp_score = pegging_play(slf_hand[:], starter_card,
             slf_score, opp_score, opp_addr, dealer)
         if check_game_over(slf_score, opp_score):
             break
 
         # for debugging
-        print("pegging exited")
+        print(slf_hand)
 
         # get opponent's hand and crib
         opp_hand = peer.exchange(opp_addr, slf_hand)
         if dealer:
-            peer.send(addr, crib)
+            peer.send(opp_addr, crib)
         else:
-            crib = peer.recv(addr)
+            crib = peer.recv(opp_addr)
 
         # count hands and crib
         slf_score, opp_score = visual.display_all_hand_counts(dealer,
