@@ -155,6 +155,9 @@ def play_game():
         if check_game_over(slf_score, opp_score):
             break
 
+        # for debugging
+        print("pegging exited")
+
         # get opponent's hand and crib
         opp_hand = peer.exchange(opp_addr, slf_hand)
         if dealer:

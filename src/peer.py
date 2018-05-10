@@ -20,6 +20,7 @@ def send(addr, send_data):
     c, _ = s.accept()
     c.send(send_data)
     c.close()
+    s.close()
 
 def recv(addr):
     """Receive a piece of data from a peer. The function assumes the other
@@ -87,6 +88,8 @@ def exchange(addr, send_data):
                 sent = 1
             except:
                 pass
+
+            s.close()
 
     recv_data = convert_from_string(recv_data)
     return recv_data
