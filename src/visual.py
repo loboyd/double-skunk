@@ -122,27 +122,64 @@ def print_table(cards, mask, starter):
     print(bot_line)
     print('\n')
 
+# def display_all_hand_counts(dealer, slf_hand, opp_hand, crib, starter,
+#     slf_score, opp_score):
+#     """Display all hands with their total point counts in the
+#     proper order"""
+#     # collect hands and description strings and establish order
+#     hands = [slf_hand, opp_hand, crib]
+#     strings = ["YOUR HAND", "OPPONENT'S HAND"]
+#     if dealer:
+#         ind = [1, 0, 2]
+#         strings.append("YOUR CRIB")
+#     else:
+#         ind = [0, 1, 2]
+#         strings.append("OPPONENT'S CRIB")
+# 
+#     # loop over hands and display
+#     for i in ind:
+#         clear_screen()
+#         print_title_bar()
+# 
+#         # calculate score and update score bar
+#         score_tmp = func.score_hand(hands[i], starter)
+#         print_score_bar(slf_score, opp_score)
+#         
+#         # display hand count to user
+#         print("\n{0}".format(strings[i]))
+#         print("SCORE: {0:3}".format(score_tmp))
+#         print_hand(hands[i])
+#         raw_input("Press ENTER to continue.")
+# 
+#     return slf_score, opp_score
+
 def display_all_hand_counts(dealer, slf_hand, opp_hand, crib, starter,
     slf_score, opp_score):
-    """Display all hands with their total point counts in the
-    proper order"""
-    # collect hands and description strings and establish order
-    hands = [slf_hand, opp_hand, crib]
-    strings = ["YOUR HAND", "OPPONENT'S HAND"]
+    """"""
     if dealer:
-        ind = [1, 0, 2]
-        strings.append("YOUR CRIB")
+        hands   = [opp_hand, slf_hand, crib]
+        owner   = [False,    True,     True]
+        strings = ["OPPONENT'S HAND", "YOUR HAND", "YOUR CRIB"]
     else:
-        ind = [0, 1, 2]
-        strings.append("OPPONENT'S CRIB")
+        hands   = [slf_hand, opp_hand, crib]
+        owner   = [True,     False,    False]
+        strings = ["YOUR HAND", "OPPONENT'S HAND", "OPPONENT'S CRIB"]
 
-    # loop over hands and display
-    for i in ind:
+    # loop over all hands
+    for i in xrange(len(hands)):
+        hand_score = func.score_hand(hands[i], starter)
+        if owner[i]:
+            slf_score += hand_score
+        else:
+            opp_score += hand_score
+
         clear_screen()
         print_title_bar()
         print_score_bar(slf_score, opp_score)
+
         print("\n{0}".format(strings[i]))
-        print("SCORE: {0:3}".format(func.score_hand(hands[i], starter)))
+        print("SCORE: {0:3}".format(hand_score))
         print_hand(hands[i])
         raw_input("Press ENTER to continue.")
 
+    return slf_score, opp_score
