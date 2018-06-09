@@ -171,6 +171,8 @@ def score_fifteens(hand, starter):
     NOTE: This structure of this function copied directly from
     score_runs() below, so there is probably a better way to do
     either or both of the functions."""
+    hand = hand[:]  # create local copy of hand
+
     # add the starter to the hand
     hand.append(starter)
     hand = sorted(hand)
@@ -236,6 +238,8 @@ def score_fifteens(hand, starter):
 def score_runs(hand, starter=None):
     """Return the number of points earned by the runs of a hand
     paired with a starter card"""
+    hand = hand[:]  # create local copy
+
     # add the starter to the hand
     if starter:
         hand.append(starter)
@@ -273,11 +277,15 @@ def score_pairs(hand, starter):
     """Return number of points earned by pairs in a hand paired
     with a starter card
     WRITE UNIT TEST FOR THIS"""
+    hand = hand[:]  # create local copy
+
     # add the starter to the hand
     hand += [starter]
 
-    points = 0
+    # map hand to ranks
+    hand = map(card_rank, hand)
 
+    points = 0
     n = len(hand)
     for i in xrange(n-1):
         for j in xrange(i+1, n):
