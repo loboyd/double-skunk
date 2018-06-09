@@ -37,7 +37,7 @@ def go_message():
     print("No playable cards. You must say \"GO\".")
     raw_input("Please press ENTER")
 
-def print_hand(cards, crib=0, index=1):
+def print_hand(cards, crib=False, index=1, starter=None):
     """Print hand up to six cards with rank, suite, and hand index in
     the following format:
 
@@ -71,6 +71,11 @@ def print_hand(cards, crib=0, index=1):
         rank_line  += crib_buffer + "| _ ||||"
         suite_line += crib_buffer + "|   ||||"
 
+    # include starter card
+    if starter:
+        starter_buffer = ' '*(35-len(rank_line))
+        rank_line  += starter_buffer + "| {0} |".format(func.card_rank_string(starter))
+        suite_line += starter_buffer + "| {0} |S".format(func.card_suite_string(starter))
 
     # print them
     print('\n')
@@ -179,7 +184,9 @@ def display_all_hand_counts(dealer, slf_hand, opp_hand, crib, starter,
 
         print("\n{0}".format(strings[i]))
         print("SCORE: {0:3}".format(hand_score))
-        print_hand(hands[i])
-        raw_input("Press ENTER to continue.")
+        print_hand(hands[i], index=False, starter=starter)
+        raw_input("\nPress ENTER to continue.")
+
+    print("WAINTING FOR OPPONENT...")
 
     return slf_score, opp_score
