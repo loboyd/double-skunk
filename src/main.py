@@ -1,3 +1,4 @@
+#!/usr/bin/env python2
 """
 This file contains the main game loop.
 """
