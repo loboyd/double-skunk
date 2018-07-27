@@ -187,6 +187,6 @@ def display_all_hand_counts(dealer, slf_hand, opp_hand, crib, starter,
         print_hand(hands[i], index=False, starter=starter)
         raw_input("\nPress ENTER to continue.")
 
-    print("WAINTING FOR OPPONENT...")
+    print("WAITING FOR OPPONENT...")
 
     return slf_score, opp_score
