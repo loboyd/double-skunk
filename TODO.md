@@ -9,7 +9,7 @@ Ideally, this document will contain "everything" that should be completed. I put
   - [x] Create design documentation
   - [ ] Create user/developer documentation (this is a way off at this point, particularly dev docs)
 - [ ] Further specify the design (in documention) including networking
-- [ ] Work on formatting for gameplay, i.e., how and when the console is cleared, the format of the pegging phase
+- [x] Work on formatting for gameplay, i.e., how and when the console is cleared, the format of the pegging phase
 - [ ] Add user commands to documentation
 - [ ] Figure out how to maintain a consistent means of connecting to a friend node (as IP address can change). [This](https://bitmessage.org/bitmessage.pdf) might be useful to read.
 ## main.py
