@@ -1,4 +1,53 @@
 import functionality as func
+import curses
+
+def menu(stdscr, options, message='double-skunk'):
+    """Get user selection from curses-built menu;
+       return index to options list
+
+       * based on a code example from github.com/bmgxyz"""
+    curses.curs_set(False)
+    stdscr.clear()
+
+    n_options = len(options)
+
+    # render message
+    menu_height = 1 + 2*n_options
+    message_line = (curses.LINES - menu_height) // 2
+    message_col  = (curses.COLS - len(message)) // 2
+    stdscr.addstr(message_line, message_col, message)
+
+    # render options
+    current_line = message_line
+    option_lines = [None]*n_options
+    for i, option in enumerate(options):
+        current_line += 2
+        option_lines[i] = current_line  # store line for option
+        current_col = (curses.COLS - len(option)) // 2
+        stdscr.addstr(current_line, current_col, option)
+
+    # start cursor on the first option
+    index = 0
+    while True:
+        index = index % n_options
+        left_col  = curses.COLS // 2 - 8
+        right_col = curses.COLS // 2 + 8
+        current_line = option_lines[index]
+
+        # display selection indicators
+        stdscr.addstr(current_line, left_col, '>')
+        stdscr.addstr(current_line, right_col, '<')
+        stdscr.refresh()
+
+        # get user input
+        c = stdscr.getkey()
+        if c == '\n':
+            return index
+        elif c in ['KEY_UP', 'KEY_DOWN']:
+            stdscr.addstr(current_line, left_col, ' ')
+            stdscr.addstr(current_line, right_col, ' ')
+            index += (-1 if c == 'KEY_UP' else 1)
+
 
 def print_user_commands(commands):
     """Print list of user commands and their descriptions"""

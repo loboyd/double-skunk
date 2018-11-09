@@ -4,6 +4,8 @@ This file contains the main game loop.
 """
 
 import random
+import curses
+
 import functionality as func
 import peer
 import visual
@@ -193,43 +195,52 @@ def edit_user_name():
     """Allows user to edit public username"""
     raise NotImplementedError
 
+# def main():
+#     # entry statement
+#     visual.clear_screen()
+#     visual.print_title_bar()
+#     print("\nWelcome to double-skunk!")
+#     print("Enter the following commands to navigate:\n")
+#     visual.print_user_commands(user_commands)
+# 
+#     # client loop
+#     while True:
+#         usr = raw_input("")
+#         visual.clear_screen()
+#         visual.print_title_bar()
+#         print
+# 
+#         if usr == 'add':
+#             # add friend
+#             print("functionality yet to be added")
+#             print("enter \"help\" to go back\n")
+#         elif usr == 'friends':
+#             # print list of friends
+#             print("functionality yet to be added")
+#             print("enter \"help\" to go back\n")
+#         elif usr == 'name':
+#             # edit/set username
+#             print("functionality yet to be added")
+#             print("enter \"help\" to go back\n")
+#         elif usr == 'new':
+#             # enter new game
+#             play_game()
+#         elif usr == 'help':
+#             print
+#             visual.print_user_commands(user_commands)
+#         elif usr == 'quit' or usr == 'exit':
+#             exit_client()
+#         else:
+#             print('That was an invalid entry. Enter \'help\' to see the available commands.')
+
 def main():
-    # entry statement
-    visual.clear_screen()
-    visual.print_title_bar()
-    print("\nWelcome to double-skunk!")
-    print("Enter the following commands to navigate:\n")
-    visual.print_user_commands(user_commands)
+    menu_items = ['Play', 'Quit']
+    ret = curses.wrapper(visual.menu, menu_items)
 
-    # client loop
-    while True:
-        usr = raw_input("")
-        visual.clear_screen()
-        visual.print_title_bar()
-        print
-
-        if usr == 'add':
-            # add friend
-            print("functionality yet to be added")
-            print("enter \"help\" to go back\n")
-        elif usr == 'friends':
-            # print list of friends
-            print("functionality yet to be added")
-            print("enter \"help\" to go back\n")
-        elif usr == 'name':
-            # edit/set username
-            print("functionality yet to be added")
-            print("enter \"help\" to go back\n")
-        elif usr == 'new':
-            # enter new game
-            play_game()
-        elif usr == 'help':
-            print
-            visual.print_user_commands(user_commands)
-        elif usr == 'quit' or usr == 'exit':
-            exit_client()
-        else:
-            print('That was an invalid entry. Enter \'help\' to see the available commands.')
+    if ret == 0:
+        play_game()
+    else:
+        exit_client()
 
 if __name__ == "__main__":
     main()
