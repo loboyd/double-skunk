@@ -4,6 +4,7 @@ import visual
 
 # general game tables
 suites = [u'\u2660', u'\u2666', u'\u2663', u'\u2665']
+suites = [s.encode('utf-8') for s in suites]
 ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'X', 'J', 'Q', 'K']
 
 def deal(dealer, opp_addr):
