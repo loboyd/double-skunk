@@ -97,6 +97,12 @@ def first_dealer_message_curses(stdscr, dealer):
 
     stdscr.addstr(message_line, message_col, message)
 
+    # put ``> continue <`` with blinking cursor here eventually
+    while True:
+        c = stdscr.getkey()
+        if c == '\n':
+            break
+
 def first_dealer_message(dealer):
     """Display message for informing the player of the first dealer"""
     # clear_screen()
