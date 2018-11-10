@@ -79,14 +79,33 @@ def print_score_bar(slf_score, opp_score):
     print("OPPONENT: |{0:3}|                    YOU: |{1:3}|".format(
         opp_score, slf_score))
 
+def first_dealer_message_curses(stdscr, dealer):
+    """curses-related code for first_dealer_message()"""
+    curses.curs_set(False)
+    stdscr.clear()
+
+    # set message
+    if dealer:
+        message = 'YOU will be the first dealer'
+    else:
+        message = 'YOUR OPPONENT will be the first dealer'
+
+    # render message
+    height = 4
+    message_line = (curses.LINES - height) // 2
+    message_col  = (curses.COLS - len(message)) // 2
+
+    stdscr.addstr(message_line, message_col, message)
+
 def first_dealer_message(dealer):
     """Display message for informing the player of the first dealer"""
-    clear_screen()
-    print_title_bar()
-    print("\n{} will be the first dealer.".format(
-        "YOU" if dealer else "YOUR OPPONENT"))
-    usr = raw_input("\n\nPress ENTER to continue to the game.")
-    print("\nWAITING FOR OPPONENT...")
+    # clear_screen()
+    # print_title_bar()
+    # print("\n{} will be the first dealer.".format(
+    #     "YOU" if dealer else "YOUR OPPONENT"))
+    # usr = raw_input("\n\nPress ENTER to continue to the game.")
+    # print("\nWAITING FOR OPPONENT...")
+    curses.wrapper(first_dearler_message_curses, dealer)
 
 def go_message():
     """Alert player they must say ``GO``"""
