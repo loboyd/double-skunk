@@ -1,9 +1,12 @@
 """This module will implement the basic peer to peer functionality using the
 built-in socket library."""
 
-import socket #import socket module
+import socket
 import time
 import random
+import curses
+
+import visual
 
 def send(addr, send_data):
     """Send a piece of data to a peer. The function assumes the other peer
@@ -122,9 +125,26 @@ def convert_from_string(data):
     elif type_flag is 'l':
         return map(int, data[1:].split(' '))
 
+def get_peer_ip_curses(stdscr):
+    """Curses-related code for getting opponent IP
+       see get_peer_ip()"""
+    # return raw_input("Please input your friend's public IP address:\n")
+    curses.curs_set(False)
+    stdscr.clear()
+
+    prompt = 'Enter your opponent\'s IP address'
+
+    # render the prompt
+    height = 4
+    prompt_line = (curses.LINES - height) // 2
+    prompt_col  = (curses.COLS - len(prompt)) // 2
+
+    return visual.usr_input(stdscr, prompt_line, prompt_col, prompt)
+
 def get_peer_ip():
     """Get IP address of a friend. (DO SOME SANITY CHECKING HERE.)
     Eventually, nodes should publish their IP's to a server along with
     unique keys so that peer nodes can just query the server. For true
     peer-to-peer, some type of routing would need to be implemented."""
-    return raw_input("Please input your friend's public IP address:\n")
+    return curses.wrapper(get_peer_ip_curses)
+

@@ -48,6 +48,13 @@ def menu(stdscr, options, message='double-skunk'):
             stdscr.addstr(current_line, right_col, ' ')
             index += (-1 if c == 'KEY_UP' else 1)
 
+def usr_input(stdscr, line, col, prompt, max_length=20):
+    """Get user input with curses"""
+    curses.echo()
+    stdscr.addstr(line, col, prompt)
+    stdscr.addstr(line+1, col, '> ')
+    stdscr.refresh()
+    return stdscr.getstr(line+1, col+2, max_length)
 
 def print_user_commands(commands):
     """Print list of user commands and their descriptions"""
