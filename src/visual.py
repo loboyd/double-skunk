@@ -105,7 +105,7 @@ def first_dealer_message(dealer):
     #     "YOU" if dealer else "YOUR OPPONENT"))
     # usr = raw_input("\n\nPress ENTER to continue to the game.")
     # print("\nWAITING FOR OPPONENT...")
-    curses.wrapper(first_dearler_message_curses, dealer)
+    curses.wrapper(first_dealer_message_curses, dealer)
 
 def go_message():
     """Alert player they must say ``GO``"""
