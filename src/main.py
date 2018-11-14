@@ -122,7 +122,7 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
 
     return slf_score, opp_score
 
-def play_game():
+def play_game(stdscr):
     """Facilitates gameplay between two peers
 
     NOT CURRENTLY A SECURE AND TRUSTLESS IMPLEMENTATION
@@ -141,7 +141,7 @@ def play_game():
     opp_draw = peer.exchange(opp_addr, str(slf_draw))
     dealer = float(slf_draw) < float(opp_draw)
 
-    visual.first_dealer_message(dealer)
+    visual.first_dealer_message(stdscr, dealer)
 
     # main game loop
     game_over = False
@@ -233,15 +233,15 @@ def edit_user_name():
 #         else:
 #             print('That was an invalid entry. Enter \'help\' to see the available commands.')
 
-def main():
+def main(stdscr):
     menu_items = ['Play', 'Quit']
-    ret = curses.wrapper(visual.menu, menu_items)
+    ret = visual.menu(stdscr, menu_items)
 
     if ret == 0:
-        play_game()
+        play_game(stdscr)
     else:
         exit_client()
 
 if __name__ == "__main__":
-    main()
+    curses.wrapper(main)
 

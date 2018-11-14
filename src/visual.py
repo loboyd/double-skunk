@@ -1,26 +1,26 @@
 import functionality as func
 import curses
 
-def menu(stdscr, options, message='double-skunk'):
+def menu(stdscr, items, message='double-skunk'):
     """Get user selection from curses-built menu;
-       return index to options list
+       return index to items list
 
        * based on a code example from github.com/bmgxyz"""
     curses.curs_set(False)
     stdscr.clear()
 
-    n_options = len(options)
+    n_items = len(items)
 
     # render message
-    menu_height = 1 + 2*n_options
+    menu_height = 1 + 2*n_items
     message_line = (curses.LINES - menu_height) // 2
     message_col  = (curses.COLS - len(message)) // 2
     stdscr.addstr(message_line, message_col, message)
 
-    # render options
+    # render items
     current_line = message_line
-    option_lines = [None]*n_options
-    for i, option in enumerate(options):
+    option_lines = [None]*n_items
+    for i, option in enumerate(items):
         current_line += 2
         option_lines[i] = current_line  # store line for option
         current_col = (curses.COLS - len(option)) // 2
@@ -29,7 +29,7 @@ def menu(stdscr, options, message='double-skunk'):
     # start cursor on the first option
     index = 0
     while True:
-        index = index % n_options
+        index = index % n_items
         left_col  = curses.COLS // 2 - 8
         right_col = curses.COLS // 2 + 8
         current_line = option_lines[index]
@@ -79,9 +79,9 @@ def print_score_bar(slf_score, opp_score):
     print("OPPONENT: |{0:3}|                    YOU: |{1:3}|".format(
         opp_score, slf_score))
 
-def first_dealer_message_curses(stdscr, dealer):
-    """curses-related code for first_dealer_message()"""
-    curses.curs_set(False)
+def first_dealer_message(stdscr, dealer):
+    """Display message for informing the player of the first dealer"""
+    # curses.curs_set(False)
     stdscr.clear()
 
     # set message
@@ -103,15 +103,15 @@ def first_dealer_message_curses(stdscr, dealer):
         if c == '\n':
             break
 
-def first_dealer_message(dealer):
-    """Display message for informing the player of the first dealer"""
+#def first_dealer_message(dealer):
+    #"""Display message for informing the player of the first dealer"""
     # clear_screen()
     # print_title_bar()
     # print("\n{} will be the first dealer.".format(
     #     "YOU" if dealer else "YOUR OPPONENT"))
     # usr = raw_input("\n\nPress ENTER to continue to the game.")
     # print("\nWAITING FOR OPPONENT...")
-    curses.wrapper(first_dealer_message_curses, dealer)
+    # curses.wrapper(first_dealer_message_curses, dealer)
 
 def go_message():
     """Alert player they must say ``GO``"""
