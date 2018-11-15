@@ -132,7 +132,7 @@ def play_game(stdscr):
     opp_score = 0
 
     # get peer address
-    host = peer.get_peer_ip()
+    host = peer.get_peer_ip(stdscr)
     port = 55693
     opp_addr = (host, port)
 

@@ -56,6 +56,16 @@ def usr_input(stdscr, line, col, prompt, max_length=20):
     stdscr.refresh()
     return stdscr.getstr(line+1, col+2, max_length)
 
+def waiting(stdscr):
+    """Print waiting message"""
+    stdscr.clear()
+    message = 'Please wait...'
+    height = 4
+    line = (curses.LINES - height) // 2
+    col = (curses.COLS - len(message)) // 2
+    stdscr.addstr(line, col, message)
+    stdscr.refresh()
+
 def print_user_commands(commands):
     """Print list of user commands and their descriptions"""
     for c in commands:

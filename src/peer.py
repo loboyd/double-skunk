@@ -125,9 +125,11 @@ def convert_from_string(data):
     elif type_flag is 'l':
         return map(int, data[1:].split(' '))
 
-def get_peer_ip_curses(stdscr):
-    """Curses-related code for getting opponent IP
-       see get_peer_ip()"""
+def get_peer_ip(stdscr):
+    """Get IP address of a friend. (DO SOME SANITY CHECKING HERE.)
+    Eventually, nodes should publish their IP's to a server along with
+    unique keys so that peer nodes can just query the server. For true
+    peer-to-peer, some type of routing would need to be implemented."""
     # return raw_input("Please input your friend's public IP address:\n")
     curses.curs_set(False)
     stdscr.clear()
@@ -139,12 +141,14 @@ def get_peer_ip_curses(stdscr):
     prompt_line = (curses.LINES - height) // 2
     prompt_col  = (curses.COLS - len(prompt)) // 2
 
-    return visual.usr_input(stdscr, prompt_line, prompt_col, prompt)
+    usr = visual.usr_input(stdscr, prompt_line, prompt_col, prompt)
+    visual.waiting(stdscr)
+    return usr
 
-def get_peer_ip():
-    """Get IP address of a friend. (DO SOME SANITY CHECKING HERE.)
-    Eventually, nodes should publish their IP's to a server along with
-    unique keys so that peer nodes can just query the server. For true
-    peer-to-peer, some type of routing would need to be implemented."""
-    return curses.wrapper(get_peer_ip_curses)
+# def get_peer_ip():
+#     """Get IP address of a friend. (DO SOME SANITY CHECKING HERE.)
+#     Eventually, nodes should publish their IP's to a server along with
+#     unique keys so that peer nodes can just query the server. For true
+#     peer-to-peer, some type of routing would need to be implemented."""
+#     return curses.wrapper(get_peer_ip_curses)
 
