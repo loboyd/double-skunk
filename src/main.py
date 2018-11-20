@@ -196,44 +196,6 @@ def edit_user_name():
     """Allows user to edit public username"""
     raise NotImplementedError
 
-# def main():
-#     # entry statement
-#     visual.clear_screen()
-#     visual.print_title_bar()
-#     print("\nWelcome to double-skunk!")
-#     print("Enter the following commands to navigate:\n")
-#     visual.print_user_commands(user_commands)
-# 
-#     # client loop
-#     while True:
-#         usr = raw_input("")
-#         visual.clear_screen()
-#         visual.print_title_bar()
-#         print
-# 
-#         if usr == 'add':
-#             # add friend
-#             print("functionality yet to be added")
-#             print("enter \"help\" to go back\n")
-#         elif usr == 'friends':
-#             # print list of friends
-#             print("functionality yet to be added")
-#             print("enter \"help\" to go back\n")
-#         elif usr == 'name':
-#             # edit/set username
-#             print("functionality yet to be added")
-#             print("enter \"help\" to go back\n")
-#         elif usr == 'new':
-#             # enter new game
-#             play_game()
-#         elif usr == 'help':
-#             print
-#             visual.print_user_commands(user_commands)
-#         elif usr == 'quit' or usr == 'exit':
-#             exit_client()
-#         else:
-#             print('That was an invalid entry. Enter \'help\' to see the available commands.')
-
 def main(stdscr):
     menu_items = ['Play', 'Quit']
     ret = visual.menu(stdscr, menu_items)

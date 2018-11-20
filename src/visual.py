@@ -1,3 +1,5 @@
+import time
+
 import functionality as func
 import curses
 
@@ -141,7 +143,7 @@ def discard(stdscr, hand, dealer):
     stdscr.addstr(line, col, text)
 
     # render hand (uses 4 lines)
-    line += 1  # hand is centered on screen by default
+    line += 3  # hand is centered on screen by default
     center_cols = render_hand(stdscr, hand, line)
     line += 4
 
@@ -158,6 +160,7 @@ def discard(stdscr, hand, dealer):
         # get user toggle
         c = stdscr.getkey()
         if c == '\n' and sum(selected_cards) == 2:
+            waiting(stdscr)
             break
         if c in '123456':
             c = int(c) - 1  # user-facing hand is 1-indexed
@@ -209,24 +212,18 @@ def first_dealer_message(stdscr, dealer):
     height = 4
     message_line = (curses.LINES - height) // 2
     message_col  = (curses.COLS - len(message)) // 2
-
     stdscr.addstr(message_line, message_col, message)
 
-    # put ``> continue <`` with blinking cursor here eventually
+    # render `continue` button
+    cont_message = '>    continue    <'
+    cont_col = (curses.COLS - len(cont_message)) // 2
+    stdscr.addstr(message_line+2, cont_col, cont_message)
+
     while True:
         c = stdscr.getkey()
         if c == '\n':
+            waiting(stdscr)
             break
-
-#def first_dealer_message(dealer):
-    #"""Display message for informing the player of the first dealer"""
-    # clear_screen()
-    # print_title_bar()
-    # print("\n{} will be the first dealer.".format(
-    #     "YOU" if dealer else "YOUR OPPONENT"))
-    # usr = raw_input("\n\nPress ENTER to continue to the game.")
-    # print("\nWAITING FOR OPPONENT...")
-    # curses.wrapper(first_dealer_message_curses, dealer)
 
 def go_message():
     """Alert player they must say ``GO``"""
