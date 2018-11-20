@@ -54,7 +54,9 @@ def usr_input(stdscr, line, col, prompt, max_length=20):
     stdscr.addstr(line, col, prompt)
     stdscr.addstr(line+1, col, '> ')
     stdscr.refresh()
-    return stdscr.getstr(line+1, col+2, max_length)
+    usr = stdscr.getstr(line+1, col+2, max_length)
+    curses.noecho()
+    return usr
 
 def waiting(stdscr):
     """Print waiting message"""
@@ -65,6 +67,109 @@ def waiting(stdscr):
     col = (curses.COLS - len(message)) // 2
     stdscr.addstr(line, col, message)
     stdscr.refresh()
+
+def render_hand(stdscr, hand, line, col=None, crib=False, starter=None, index=True):
+    """Render the user's hand to the screen, center by default
+       format:
+
+       | A || 2 || 3 || 4 || 5 || 6 |
+       | * || * || * || * || * || * |
+       ------------------------------
+         1    2    3    4    5    6
+
+       """
+    n = len(hand)
+
+    # set up text for each line
+    rank_text  = ''
+    suit_text  = ''
+    div_line   = ''
+    index_line = ''
+
+    if n > 0:
+        # build up text for each line
+        ct = 1
+        for c in hand:
+            rank_text  += '| {} |'.format(func.card_rank_string(c))
+            suit_text  += '| {} |'.format(func.card_suite_string(c))
+            div_line   += '-----'
+            index_line += '  {}  '.format(ct)
+            ct += 1
+
+        # include crib
+        if crib:
+            crib_buffer = ' '*(35-len(rank_text))
+            rank_text += crib_buffer + '| _ ||||'
+            suit_text += crib_buffer + '|   ||||'
+
+        # include starter card
+        if starter:
+            starter_buffer = ' '*(35-len(rank_text))
+            rank_text += starter_buffer + '| {} |'.format(func.card_rank_string(starter))
+            suit_text += starter_buffer + '| {} |'.format(func.card_suite_string(starter))
+
+        # render
+        if not col:
+            col = (curses.COLS - len(rank_text)) // 2
+        stdscr.addstr(line,  col, rank_text)
+        stdscr.addstr(line+1, col, suit_text)
+        if index:
+            stdscr.addstr(line+2, col, div_line)
+            stdscr.addstr(line+3, col, index_line)
+        stdscr.refresh()
+
+    return [5*x + col + 2 for x in range(n)]
+
+
+def discard(stdscr, hand, dealer):
+    """Get user-selected discards and updated hand"""
+    stdscr.clear()
+    #title_bar(stdscr)
+
+    height = 2
+
+    # render instruction
+    text = 'Use number keys + ENTER to discard two cards.'
+    line = (curses.LINES - height) // 2
+    col = (curses.COLS - len(text)) // 2
+    stdscr.addstr(line, col, text)
+
+    # render crib ownership message
+    text = '{} the crib.'.format('You have' if dealer else 'Your opponent has')
+    line += 1
+    col = (curses.COLS - len(text)) // 2
+    stdscr.addstr(line, col, text)
+
+    # render hand (uses 4 lines)
+    line += 1  # hand is centered on screen by default
+    center_cols = render_hand(stdscr, hand, line)
+    line += 4
+
+    # user selection
+    selected_cards = [False]*len(hand)
+    while True:
+        stdscr.refresh()
+
+        # render indicators
+        for i in range(len(selected_cards)):
+            indicator = '^' if selected_cards[i] else ' '
+            stdscr.addstr(line, center_cols[i], indicator)
+
+        # get user toggle
+        c = stdscr.getkey()
+        if c == '\n' and sum(selected_cards) == 2:
+            break
+        if c in '123456':
+            c = int(c) - 1  # user-facing hand is 1-indexed
+            selected_cards[c] = not selected_cards[c]
+
+    discards = [hand[i] for i in range(6) if selected_cards[i]]
+    # remove discards from hand, largest index to smallest
+    for i in range(5,-1,-1):
+        if selected_cards[i]:
+            del hand[i]
+
+    return discards, hand
 
 def print_user_commands(commands):
     """Print list of user commands and their descriptions"""

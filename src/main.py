@@ -5,6 +5,7 @@ This file contains the main game loop.
 
 import random
 import curses
+import locale
 
 import functionality as func
 import peer
@@ -150,7 +151,7 @@ def play_game(stdscr):
         slf_hand, starter_card = func.deal(dealer, opp_addr)
 
         # perform discard
-        crib, slf_hand = func.get_crib(dealer, slf_hand, opp_addr)
+        crib, slf_hand = func.get_crib(stdscr, dealer, slf_hand, opp_addr)
 
         # pegging phase
         slf_score, opp_score = pegging_play(slf_hand[:], starter_card,
@@ -243,5 +244,6 @@ def main(stdscr):
         exit_client()
 
 if __name__ == "__main__":
+    locale.setlocale(locale.LC_ALL, '')  # for unicode strings
     curses.wrapper(main)
 

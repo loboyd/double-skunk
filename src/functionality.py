@@ -91,10 +91,10 @@ def discard(hand, dealer):
     return discards, hand
 
 
-def get_crib(dealer, hand, addr):
+def get_crib(stdscr, dealer, hand, addr):
     """Return crib after performing discard and exchanging card info
     with peer"""
-    slf_crib_cards, hand = discard(hand, dealer)
+    slf_crib_cards, hand = visual.discard(stdscr, hand, dealer)
     # slf_crib_cards_string = "{0} {1}".format(slf_crib_cards[0], slf_crib_cards[1])
 
     #opp_crib_cards_string = peer.exchange(addr, slf_crib_cards_string)
