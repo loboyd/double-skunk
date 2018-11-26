@@ -11,15 +11,6 @@ import functionality as func
 import peer
 import visual
 
-user_commands = {
-    'add......': 'add a new friend',
-    'friends..': 'see friend list',
-    'name.....': 'edit your username',
-    'new......': 'enter new game',
-    'help.....': 'see this list of commands',
-    'quit.....': 'quit game'
-}
-
 def exit_client():
     """Say goodbye and exit client"""
     visual.clear_screen()
@@ -183,18 +174,6 @@ def check_game_over(slf_score, opp_score):
         return True
     else:
         return False
-
-def add_friend():
-    """Saves a new friend to the friend list"""
-    raise NotImplementedError
-
-def view_friends_list():
-    """prints friends list to screen"""
-    raise NotImplementedError
-
-def edit_user_name():
-    """Allows user to edit public username"""
-    raise NotImplementedError
 
 def main(stdscr):
     menu_items = ['Play', 'Quit']
