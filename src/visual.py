@@ -29,13 +29,13 @@ def first_dealer_message(dealer):
     print_title_bar()
     print("\n{} will be the first dealer.".format(
         "YOU" if dealer else "YOUR OPPONENT"))
-    usr = raw_input("\n\nPress ENTER to continue to the game.")
+    usr = input("\n\nPress ENTER to continue to the game.")
     print("\nWAITING FOR OPPONENT...")
 
 def go_message():
     """Alert player they must say ``GO``"""
     print("No playable cards. You must say \"GO\".")
-    raw_input("Please press ENTER")
+    input("Please press ENTER")
 
 def print_hand(cards, crib=False, index=1, starter=None):
     """Print hand up to six cards with rank, suite, and hand index in
@@ -154,7 +154,7 @@ def display_all_hand_counts(dealer, slf_hand, opp_hand, crib, starter,
         print("\n{0}".format(strings[i]))
         print("SCORE: {0:3}".format(hand_score))
         print_hand(hands[i], index=False, starter=starter)
-        raw_input("\nPress ENTER to continue.")
+        input("\nPress ENTER to continue.")
 
     print("WAITING FOR OPPONENT...")
 

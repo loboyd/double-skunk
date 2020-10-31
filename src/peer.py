@@ -127,4 +127,4 @@ def get_peer_ip():
     Eventually, nodes should publish their IP's to a server along with
     unique keys so that peer nodes can just query the server. For true
     peer-to-peer, some type of routing would need to be implemented."""
-    return raw_input("Please input your friend's public IP address:\n")
+    return input("Please input your friend's public IP address:\n")

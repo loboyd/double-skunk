@@ -60,7 +60,7 @@ def pegging_play(hand, starter_card, slf_score, opp_score, addr, dealer):
                 # get valid play
                 play_value_tmp = 32
                 while play_value_tmp + table_value_sum > 31:
-                    print play_value_tmp, table_value_sum
+                    print(play_value_tmp, table_value_sum)
                     if play_value_tmp != 32:
                         print("Please select a lower rank card.\n")
                     play_card, hand = func.select_cards(hand)
@@ -203,7 +203,7 @@ def main():
 
     # client loop
     while True:
-        usr = raw_input("")
+        usr = input("")
         visual.clear_screen()
         visual.print_title_bar()
         print
